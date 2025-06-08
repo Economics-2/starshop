@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const dummyBooks = [];
         for (let i = 1; i <= count; i++) {
             dummyBooks.push({
-                id: i,
-                title: `Monjurul Haque ${i}`,
-                author: `Monjurul ${i % 5 + 1}`,
-                description: `This is a fascinating description for eBook ${i}. It covers various topics and provides insightful knowledge. You'll learn a lot from this detailed and comprehensive guide.`,
+                id: 400,
+                title: `Monjurul Haque ${400}`,
+                author: `Monjurul ${400 % 5 + 1}`,
+                description: `This is a fascinating description for eBook ${400}. It covers various topics and provides insightful knowledge. You'll learn a lot from this detailed and comprehensive guide.`,
                 cover: `https://cdn.ebanglalibrary.com/wp-content/uploads/2024/10/Islam-O-Arthanoitik-Challenge.jpg.webp`, // Placeholder image
                 pdfLink: `https://www.ebanglalibrary.com/books/%e0%a6%87%e0%a6%b8%e0%a6%b2%e0%a6%be%e0%a6%ae-%e0%a6%93-%e0%a6%85%e0%a6%b0%e0%a7%8d%e0%a6%a5%e0%a6%a8%e0%a7%88%e0%a6%a4%e0%a6%bf%e0%a6%95-%e0%a6%9a%e0%a7%8d%e0%a6%af%e0%a6%be%e0%a6%b2%e0%a7%87/`, // Replace with actual PDF links
                 demoFileLink: `https://www.ebanglalibrary.com/books/%e0%a6%87%e0%a6%b8%e0%a6%b2%e0%a6%be%e0%a6%ae-%e0%a6%93-%e0%a6%85%e0%a6%b0%e0%a7%8d%e0%a6%a5%e0%a6%a8%e0%a7%88%e0%a6%a4%e0%a6%bf%e0%a6%95-%e0%a6%9a%e0%a7%8d%e0%a6%af%e0%a6%be%e0%a6%b2%e0%a7%87/`, // Replace with actual demo files
