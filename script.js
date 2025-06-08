@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 author: `Author Name ${i % 5 + 1}`,
                 description: `This is a fascinating description for eBook ${i}. It covers various topics and provides insightful knowledge. You'll learn a lot from this detailed and comprehensive guide.`,
                 cover: `https://via.placeholder.com/280x250/4CAF50/FFFFFF?text=Book+${i}`, // Placeholder image
-                pdfLink: `https://example.com/ebooks/book${i}.pdf`, // Replace with actual PDF links
+                pdfLink: `download.pdf`, // Replace with actual PDF links
                 demoFileLink: `https://example.com/demos/demo_book${i}.zip`, // Replace with actual demo files
                 pages: Math.floor(Math.random() * 300) + 100, // Random pages between 100 and 400
                 fileSize: `${(Math.random() * 10 + 2).toFixed(1)} MB` // Random file size
