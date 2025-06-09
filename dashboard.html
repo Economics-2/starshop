@@ -6,6 +6,7 @@
     <title>ড্যাশবোর্ড</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
     <style>
+        /* Your existing CSS for dashboard.html */
         body {
             font-family: 'Hind Siliguri', sans-serif;
             background-color: #e0f2f7;
@@ -46,8 +47,7 @@
 <body>
     <div class="dashboard-content">
         <h1>আপনার ড্যাশবোর্ডে স্বাগতম!</h1>
-        <p>আপনি সফলভাবে লগইন করেছেন। এখানে আপনার ব্যক্তিগত বিষয়বস্তু এবং কার্যকারিতা থাকবে।</p>
-        <p>আপনার প্রোফাইল তথ্য, সাম্প্রতিক কার্যকলাপ বা আপনার অ্যাকাউন্টের অন্যান্য বিবরণ এখানে দেখান।</p>
+        <p id="dashboard-welcome-message">...</p> <p>আপনি সফলভাবে লগইন করেছেন। এখানে আপনার ব্যক্তিগত বিষয়বস্তু এবং কার্যকারিতা থাকবে।</p>
         <button id="logoutBtn">লগআউট</button>
     </div>
 
@@ -56,7 +56,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
 
     <script>
-        // Initialize Firebase again on this page if it's a separate file
+        // Initialize Firebase - MUST BE HERE AGAIN FOR THIS SEPARATE PAGE
         const firebaseConfig = {
             apiKey: "AIzaSyCVyXmjKI9pL37LJXkVcWMPtZSaXZG802c", // Use your actual config
             authDomain: "loginpage-6cb4a.firebaseapp.com",
@@ -68,20 +68,38 @@
         };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
+        const db = firebase.firestore(); // If you need firestore on dashboard
 
-        // Logout button functionality on the dashboard page
+        // Logout button functionality
         document.getElementById('logoutBtn').addEventListener('click', () => {
             auth.signOut().then(() => {
-                window.location.href = 'index.html'; // Redirect back to login page
+                window.location.href = 'index.html'; // Redirect back to index/login page
             }).catch((error) => {
-                console.error("Error logging out:", error);
+                console.error("লগআউট ত্রুটি:", error);
             });
         });
 
-        // Optional: Check if user is logged in when dashboard page loads
+        // Check if user is logged in when dashboard page loads
         auth.onAuthStateChanged(user => {
-            if (!user) {
-                // No user is signed in, redirect to login page
+            if (user) {
+                // User is signed in. You can fetch and display user-specific data here.
+                const welcomeMessage = document.getElementById('dashboard-welcome-message');
+                if (welcomeMessage) {
+                    // Fetch username from Firestore if stored there
+                    db.collection('users').doc(user.uid).get().then(doc => {
+                        if (doc.exists) {
+                            const userData = doc.data();
+                            welcomeMessage.textContent = `স্বাগতম, ${userData.username || user.email}!`;
+                        } else {
+                            welcomeMessage.textContent = `স্বাগতম, ${user.email}!`;
+                        }
+                    }).catch(error => {
+                        console.error("Error fetching user data:", error);
+                        welcomeMessage.textContent = `স্বাগতম, ${user.email}!`;
+                    });
+                }
+            } else {
+                // No user is signed in, redirect to index.html (login page)
                 window.location.href = 'index.html';
             }
         });
