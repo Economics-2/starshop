@@ -35,16 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (loginForm) loginForm.reset();
             if (signupForm) signupForm.reset();
             switchForm('login');
-            // script.js (Inside the DOMContentLoaded listener)
-
-    const browseAllBtn = document.getElementById('browse-all-btn');
-
-    if (browseAllBtn) {
-        browseAllBtn.addEventListener('click', function() {
-            window.location.href = 'browse.html'; // Redirect to the browse page
-        });
-    }
+            // *** REMOVED browseAllBtn code from here ***
         }
+    }
 
     function hideAuthModal() {
         if (authModal) {
@@ -111,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('login-password').value;
 
             if (!email || !password) {
-                authMessage.textContent = 'দয়া করে ইমেইল এবং পাসওয়ার্ড উভয়ই পূরণ করুন।';
+                authMessage.textContent = 'দয়া করে ইমেইল এবং পাসওয়ার্ড উভয়ই পূরণ করুন।';
                 authMessage.classList.add('error');
                 return;
             }
@@ -138,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else if (error.code === 'auth/network-request-failed') {
                         errorMessage = 'ইন্টারনেট সংযোগ সমস্যা বা সার্ভার অনুপলব্ধ।';
                     } else if (error.code === 'auth/too-many-requests') {
-                         errorMessage = 'অনেক বেশি লগইন প্রচেষ্টা। কিছুক্ষণ পর আবার চেষ্টা করুন।';
+                        errorMessage = 'অনেক বেশি লগইন প্রচেষ্টা। কিছুক্ষণ পর আবার চেষ্টা করুন।';
                     }
                     authMessage.textContent = `ত্রুটি: ${errorMessage}`;
                     authMessage.classList.add('error');
@@ -157,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('signup-password').value;
 
             if (!username || !email || !password) {
-                authMessage.textContent = 'দয়া করে সব ফিল্ড পূরণ করুন।';
+                authMessage.textContent = 'দয়া করে সব ফিল্ড পূরণ করুন।';
                 authMessage.classList.add('error');
                 return;
             }
@@ -190,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .catch((error) => {
                     let errorMessage = 'রেজিস্ট্রেশন ব্যর্থ হয়েছে।';
                     if (error.code === 'auth/email-already-in-use') {
-                        errorMessage = 'এই ইমেইল দিয়ে ইতিমধ্যেই একটি অ্যাকাউন্ট আছে।';
+                        errorMessage = 'এই ইমেইল দিয়ে ইতিমধ্যেই একটি অ্যাকাউন্ট আছে।';
                     } else if (error.code === 'auth/invalid-email') {
                         errorMessage = 'বৈধ ইমেইল ফরম্যাট দিন।';
                     } else if (error.code === 'auth/weak-password') {
@@ -234,13 +227,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error("Password Reset Error:", error);
             });
     };
+
+    // --- ADD THE browseAllBtn LOGIC HERE, INSIDE DOMContentLoaded ---
+    const browseAllBtn = document.getElementById('browse-all-btn');
+    if (browseAllBtn) {
+        browseAllBtn.addEventListener('click', function() {
+            window.location.href = 'browse.html'; // Redirect to the browse page
+        });
+    }
+
 }); // End of DOMContentLoaded
 
 
 // --- Global Firebase Auth State Listener (for dashboard.html and protecting pages) ---
 // This runs whenever the user's login state changes (on page load, login, logout)
-// script.js (Only the auth.onAuthStateChanged part)
-
 auth.onAuthStateChanged(user => {
     const currentPath = window.location.pathname;
     const baseDir = '/starshop/';
