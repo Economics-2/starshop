@@ -231,25 +231,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // --- Global Firebase Auth State Listener (for dashboard.html and protecting pages) ---
 // This runs whenever the user's login state changes (on page load, login, logout)
+// script.js (Only the auth.onAuthStateChanged part)
+
 auth.onAuthStateChanged(user => {
-    // Get the full path, e.g., "/starshop/index.html" or "/starshop/"
     const currentPath = window.location.pathname;
-
-    // Check if the current path includes the base directory (e.g., /starshop/)
-    // This helps in GitHub Pages hosting where the root is not just '/'
-    const baseDir = '/starshop/'; // IMPORTANT: Adjust this if your base directory changes
-
-    // Get the relative path (e.g., "index.html" or "")
+    const baseDir = '/starshop/';
     const relativePath = currentPath.startsWith(baseDir) ? currentPath.substring(baseDir.length) : currentPath;
 
-    // List of public pages that logged-in users should be redirected *from*
-    const publicPages = ['index.html', '', 'browse.html', 'categories.html', 'about.html']; // '' covers the base URL like /starshop/
-
     // List of protected pages that logged-out users should be redirected *from*
-    const protectedPages = ['dashboard.html'];
-
+    const protectedPages = ['dashboard.html']; // Only dashboard.html is protected now
 
     if (user) {
+        // User is signed in
+        // *** NO REDIRECTION FROM PUBLIC PAGES TO DASHBOARD IF THEY ARE LOGGED IN ***
+        // This means logged-in users can freely visit index.html, browse.html, etc.
+    } else {
         // User is signed out
         // If they are on a protected page (like dashboard.html), redirect them back to index.html
         if (protectedPages.includes(relativePath)) {
