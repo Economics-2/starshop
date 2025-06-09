@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
         }
-    }
 
     function hideAuthModal() {
         if (authModal) {
