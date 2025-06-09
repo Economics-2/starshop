@@ -35,6 +35,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (loginForm) loginForm.reset();
             if (signupForm) signupForm.reset();
             switchForm('login');
+            // script.js (Inside the DOMContentLoaded listener)
+
+    const browseAllBtn = document.getElementById('browse-all-btn');
+
+    if (browseAllBtn) {
+        browseAllBtn.addEventListener('click', function() {
+            window.location.href = 'browse.html'; // Redirect to the browse page
+        });
+    }
         }
     }
 
