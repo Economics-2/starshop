@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ড্যাশবোর্ড</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #e0f2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .dashboard-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #007bff;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-content">
+        <h1>আপনার ড্যাশবোর্ডে স্বাগতম!</h1>
+        <p>আপনি সফলভাবে লগইন করেছেন। এখানে আপনার ব্যক্তিগত বিষয়বস্তু এবং কার্যকারিতা থাকবে।</p>
+        <p>আপনার প্রোফাইল তথ্য, সাম্প্রতিক কার্যকলাপ বা আপনার অ্যাকাউন্টের অন্যান্য বিবরণ এখানে দেখান।</p>
+        <button id="logoutBtn">লগআউট</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+
+    <script>
+        // Initialize Firebase again on this page if it's a separate file
+        const firebaseConfig = {
+            apiKey: "AIzaSyCVyXmjKI9pL37LJXkVcWMPtZSaXZG802c", // Use your actual config
+            authDomain: "loginpage-6cb4a.firebaseapp.com",
+            projectId: "loginpage-6cb4a",
+            storageBucket: "loginpage-6cb4a.firebasestorage.app",
+            messagingSenderId: "475440251033",
+            appId: "1:475440251033:web:1a9b2343c07fe4a996b808",
+            measurementId: "G-ZLG460T4KR"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Logout button functionality on the dashboard page
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            auth.signOut().then(() => {
+                window.location.href = 'index.html'; // Redirect back to login page
+            }).catch((error) => {
+                console.error("Error logging out:", error);
+            });
+        });
+
+        // Optional: Check if user is logged in when dashboard page loads
+        auth.onAuthStateChanged(user => {
+            if (!user) {
+                // No user is signed in, redirect to login page
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
