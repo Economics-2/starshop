@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>ইউজার পোর্টাল</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Hind Siliguri', sans-serif;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: rgba(0,0,0,0.75);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      color: white;
+    }
+    h2 {
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #2196F3;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0b7dda;
+    }
+    .link {
+      color: #90CAF9;
+      cursor: pointer;
+      text-align: center;
+      font-size: 14px;
+    }
+    .hidden { display: none; }
+    .message { text-align: center; font-size: 14px; margin-top: 10px; }
+    .profile { background: rgba(255,255,255,0.95); color: black; padding: 20px; border-radius: 15px; text-align: center; }
+  </style>
+</head>
+<body>
+<div class="container" id="authSection">
+  <h2 id="formTitle">লগইন করুন</h2>
+  <form id="authForm">
+    <input type="text" id="name" placeholder="নাম" class="hidden">
+    <input type="email" id="email" placeholder="ইমেইল" required>
+    <input type="tel" id="phone" placeholder="ফোন নম্বর" class="hidden">
+    <input type="password" id="password" placeholder="পাসওয়ার্ড" required>
+    <input type="password" id="confirmPassword" placeholder="পাসওয়ার্ড নিশ্চিত করুন" class="hidden">
+    <button type="submit" id="submitButton">লগইন</button>
+    <div class="link" onclick="toggleMode()">নতুন একাউন্ট তৈরি করুন</div>
+    <div class="link" onclick="resetPassword()">পাসওয়ার্ড ভুলে গেছেন?</div>
+    <div class="message" id="messageBox"></div>
+  </form>
+</div>
+<div class="container hidden" id="profileSection">
+  <div class="profile">
+    <h2>প্রোফাইল</h2>
+    <p id="profileName"></p>
+    <p id="profileEmail"></p>
+    <p id="profilePhone"></p>
+    <button onclick="logout()">লগআউট</button>
+  </div>
+</div>
+<script  
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCVyXmjKI9pL37LJXkVcWMPtZSaXZG802c",
+  authDomain: "loginpage-6cb4a.firebaseapp.com",
+  projectId: "loginpage-6cb4a",
+  storageBucket: "loginpage-6cb4a.firebasestorage.app",
+  messagingSenderId: "475440251033",
+  appId: "1:475440251033:web:1a9b2343c07fe4a996b808",
+  measurementId: "G-ZLG460T4KR"
+};
+  
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  const authForm = document.getElementById('authForm');
+  const name = document.getElementById('name');
+  const email = document.getElementById('email');
+  const phone = document.getElementById('phone');
+  const password = document.getElementById('password');
+  const confirmPassword = document.getElementById('confirmPassword');
+  const formTitle = document.getElementById('formTitle');
+  const submitButton = document.getElementById('submitButton');
+  const messageBox = document.getElementById('messageBox');
+  const authSection = document.getElementById('authSection');
+  const profileSection = document.getElementById('profileSection');
+
+  const profileName = document.getElementById('profileName');
+  const profileEmail = document.getElementById('profileEmail');
+  const profilePhone = document.getElementById('profilePhone');
+
+  let isRegister = false;
+
+  function toggleMode() {
+    isRegister = !isRegister;
+    name.classList.toggle('hidden');
+    phone.classList.toggle('hidden');
+    confirmPassword.classList.toggle('hidden');
+    formTitle.innerText = isRegister ? 'রেজিস্ট্রেশন করুন' : 'লগইন করুন';
+    submitButton.innerText = isRegister ? 'রেজিস্টার' : 'লগইন';
+    messageBox.innerText = '';
+  }
+
+  authForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const emailVal = email.value;
+    const passVal = password.value;
+    if (isRegister) {
+      if (passVal !== confirmPassword.value) {
+        messageBox.innerText = 'পাসওয়ার্ড মেলে না!';
+        messageBox.style.color = 'red';
+        return;
+      }
+      auth.createUserWithEmailAndPassword(emailVal, passVal)
+        .then(cred => {
+          const uid = cred.user.uid;
+          return db.collection('users').doc(uid).set({
+            name: name.value,
+            email: emailVal,
+            phone: phone.value,
+            role: 'user'
+          });
+        })
+        .then(() => {
+          messageBox.innerText = 'রেজিস্ট্রেশন সফল!';
+          messageBox.style.color = 'lightgreen';
+          auth.currentUser.sendEmailVerification();
+        })
+        .catch(err => {
+          messageBox.innerText = 'ত্রুটি: ' + err.message;
+          messageBox.style.color = 'red';
+        });
+    } else {
+      auth.signInWithEmailAndPassword(emailVal, passVal)
+        .then(() => {
+          messageBox.innerText = 'লগইন সফল!';
+          loadProfile();
+        })
+        .catch(err => {
+          messageBox.innerText = 'ত্রুটি: ' + err.message;
+          messageBox.style.color = 'red';
+        });
+    }
+  });
+
+  function resetPassword() {
+    const emailVal = email.value;
+    if (!emailVal) {
+      messageBox.innerText = 'রিসেট করতে ইমেইল দিন।';
+      messageBox.style.color = 'orange';
+      return;
+    }
+    auth.sendPasswordResetEmail(emailVal)
+      .then(() => {
+        messageBox.innerText = 'রিসেট লিঙ্ক পাঠানো হয়েছে!';
+        messageBox.style.color = 'lightgreen';
+      })
+      .catch(err => {
+        messageBox.innerText = 'ত্রুটি: ' + err.message;
+        messageBox.style.color = 'red';
+      });
+  }
+
+  function loadProfile() {
+    authSection.classList.add('hidden');
+    profileSection.classList.remove('hidden');
+    const user = auth.currentUser;
+    db.collection('users').doc(user.uid).get().then(doc => {
+      const data = doc.data();
+      profileName.innerText = 'নাম: ' + data.name;
+      profileEmail.innerText = 'ইমেইল: ' + data.email;
+      profilePhone.innerText = 'ফোন: ' + data.phone;
+    });
+  }
+
+  function logout() {
+    auth.signOut().then(() => {
+      profileSection.classList.add('hidden');
+      authSection.classList.remove('hidden');
+    });
+  }
+
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      loadProfile();
+    }
+  });
+</script></body>
+</html>
