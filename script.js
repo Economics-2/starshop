@@ -250,16 +250,6 @@ auth.onAuthStateChanged(user => {
 
 
     if (user) {
-        // User is signed in
-        // If they are on a public page, redirect them to dashboard.html
-        if (publicPages.includes(relativePath) || (relativePath === '' && currentPath === baseDir)) { // Check for base URL specifically
-             const authModal = document.getElementById('auth-modal');
-             // Only redirect if the modal is NOT currently open
-             if (!authModal || authModal.style.display !== 'flex') {
-                window.location.href = 'dashboard.html';
-             }
-        }
-    } else {
         // User is signed out
         // If they are on a protected page (like dashboard.html), redirect them back to index.html
         if (protectedPages.includes(relativePath)) {
