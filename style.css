@@ -74,7 +74,9 @@
     display: block; /* Shown when active */
 }
 
-/* Add styles for form-group, input, submit-btn, auth-message (success/error) as per previous examples */@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* Add styles for form-group, input, submit-btn, auth-message (success/error) as per previous examples */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root {
     --primary-color: #4CAF50; /* Vibrant Green */
