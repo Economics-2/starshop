@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-29YE1Y9G9E"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-29YE1Y9G9E"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){dataLayer.push(arguments);}\
   gtag('js', new Date());
 
   gtag('config', 'G-29YE1Y9G9E');
@@ -18,33 +17,63 @@
     </head>
 <body>
     <header class="main-header">
-    <div class="container header-content">
-        <h1 class="logo"><a href="index.html">My eBook Hub</a></h1> 
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="browse.html">Browse Books</a></li>
-                <li><a href="categories.html">Categories</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="#" id="open-auth-modal-btn">Login/Signup</a></li> </ul>
-        </nav>
-    </div>
-</header>
-
-    <section class="banner" id="home">
-        <div class="container banner-content">
-            <h2>Unlock a World of Knowledge</h2>
-            <p>Explore hundreds of free e-books and PDF resources.</p>
-            <button class="cta-button" id="browse-all-btn">Browse All eBooks</button>
+        <div class="container header-content">
+            <h1 class="logo"><a href="index.html">My eBook Hub</a></h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse Books</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#" id="open-auth-modal-btn">Login/Signup</a></li>
+                </ul>
+            </nav>
         </div>
-    </section>
+    </header>
 
     <main class="main-content container" id="browse">
+        <section class="browse-controls">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search for ebooks...">
+                <button id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="categories-filter">
+                <label for="category-select">Filter by Category:</label>
+                <select id="category-select">
+                    <option value="all">All Categories</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                    <option value="science">Science</option>
+                    <option value="history">History</option>
+                    <option value="programming">Programming</option>
+                    <option value="education">Education</option>
+                    </select>
+            </div>
+        </section>
+
         <section class="ebook-grid-section">
-            <h2>Featured eBooks & PDFs</h2>
+            <h2>All eBooks & PDFs</h2>
             <div class="ebook-grid" id="ebook-list">
+                <div class="ebook-item">
+                    <img src="https://via.placeholder.com/150/FF5733/FFFFFF?text=Book+1" alt="The Great Adventure">
+                    <h3>The Great Adventure</h3>
+                    <p>Author: Jane Doe</p>
+                    <button class="view-details-btn" data-ebook-id="book1">View Details</button>
                 </div>
-            <button class="load-more-btn" id="load-more-btn">Load More</button>
+                <div class="ebook-item">
+                    <img src="https://via.placeholder.com/150/33FF57/FFFFFF?text=Book+2" alt="Coding Fundamentals">
+                    <h3>Coding Fundamentals</h3>
+                    <p>Author: John Smith</p>
+                    <button class="view-details-btn" data-ebook-id="book2">View Details</button>
+                </div>
+                <div class="ebook-item">
+                    <img src="https://via.placeholder.com/150/3357FF/FFFFFF?text=Book+3" alt="Historical Insights">
+                    <h3>Historical Insights</h3>
+                    <p>Author: Emily White</p>
+                    <button class="view-details-btn" data-ebook-id="book3">View Details</button>
+                </div>
+                </div>
+            <button class="load-more-btn" id="load-more-browse-btn">Load More</button>
         </section>
     </main>
 
@@ -52,13 +81,14 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <div class="modal-body">
-                <h3>eBook Title</h3>
-                <img src="" alt="eBook Cover" class="modal-cover">
-                <p class="modal-description"></p>
+                <h3 id="modal-title">eBook Title</h3>
+                <img src="" alt="eBook Cover" class="modal-cover" id="modal-cover">
+                <p class="modal-description" id="modal-description"></p>
                 <div class="modal-details">
                     <p><strong>Author:</strong> <span id="modal-author"></span></p>
                     <p><strong>Pages:</strong> <span id="modal-pages"></span></p>
                     <p><strong>File Size:</strong> <span id="modal-file-size"></span></p>
+                    <p><strong>Category:</strong> <span id="modal-category"></span></p>
                 </div>
                 <div class="modal-preview" id="modal-preview-container">
                     <h4>Preview:</h4>
@@ -71,8 +101,8 @@
                     </div>
                 </div>
                 <div class="modal-actions">
-                    <a href="#" class="download-btn" target="_blank"><i class="fas fa-download"></i> Download PDF</a>
-                    <a href="#" class="demo-file-btn" target="_blank"><i class="fas fa-file-alt"></i> Demo File</a>
+                    <a href="#" class="download-btn" id="modal-download-btn" target="_blank"><i class="fas fa-download"></i> Download PDF</a>
+                    <a href="#" class="demo-file-btn" id="modal-demo-btn" target="_blank"><i class="fas fa-file-alt"></i> Demo File</a>
                 </div>
             </div>
         </div>
