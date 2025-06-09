@@ -1,9 +1,8 @@
 // script.js
 
 // Firebase Configuration - PUT THIS AT THE VERY TOP OF script.js
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCVyXmjKI9pL37LJXkVcWMPtZSaXZG802c", // Use your ACTUAL Firebase API Key
+    apiKey: "AIzaSyCVyXmjKI9pL37LJXkVcWMPtZSaXZG802c",
     authDomain: "loginpage-6cb4a.firebaseapp.com",
     projectId: "loginpage-6cb4a",
     storageBucket: "loginpage-6cb4a.firebasestorage.app",
@@ -22,26 +21,23 @@ const db = firebase.firestore();
 // --- Modal and Form Handling Logic ---
 document.addEventListener('DOMContentLoaded', function() {
     const authModal = document.getElementById('auth-modal');
-    const openAuthModalBtn = document.getElementById('open-auth-modal-btn'); // Button in header
-    const closeButtons = document.querySelectorAll('#auth-modal .close-button'); // Close 'x' button(s)
-    const tabButtons = document.querySelectorAll('#auth-modal .tab-button'); // Login/Signup tabs
+    const openAuthModalBtn = document.getElementById('open-auth-modal-btn');
+    const closeButtons = document.querySelectorAll('#auth-modal .close-button');
+    const tabButtons = document.querySelectorAll('#auth-modal .tab-button');
     const loginForm = document.getElementById('login-form');
     const signupForm = document.getElementById('signup-form');
-    const authMessage = document.getElementById('auth-message'); // Message display area
+    const authMessage = document.getElementById('auth-message');
 
-    // Function to show the modal
     function showAuthModal() {
         if (authModal) {
-            authModal.style.display = 'flex'; // Use flex to center the content
+            authModal.style.display = 'flex';
             clearAuthMessage();
-            // Optionally reset forms and default to login tab when opening
             if (loginForm) loginForm.reset();
             if (signupForm) signupForm.reset();
             switchForm('login');
         }
     }
 
-    // Function to hide the modal
     function hideAuthModal() {
         if (authModal) {
             authModal.style.display = 'none';
@@ -49,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to switch between login and signup forms
     function switchForm(targetTab) {
         tabButtons.forEach(button => button.classList.remove('active'));
         if (loginForm) loginForm.classList.remove('active');
@@ -67,18 +62,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Helper function to clear auth messages
     function clearAuthMessage() {
         if (authMessage) {
             authMessage.textContent = '';
-            authMessage.className = 'auth-message'; // Reset classes
+            authMessage.className = 'auth-message';
         }
     }
 
-    // --- Event Listeners for Modal ---
     if (openAuthModalBtn) {
         openAuthModalBtn.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior
+            event.preventDefault();
             showAuthModal();
         });
     }
@@ -87,14 +80,12 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', hideAuthModal);
     });
 
-    // Close modal if user clicks outside of the modal content
     window.addEventListener('click', function(event) {
         if (event.target === authModal) {
             hideAuthModal();
         }
     });
 
-    // Tab buttons functionality
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
             const targetTab = this.getAttribute('data-tab');
@@ -102,13 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
     // --- Firebase Form Submission Handlers ---
-
-    // Login Form Submission
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission (page reload)
+            event.preventDefault();
             clearAuthMessage();
 
             const email = document.getElementById('login-email').value;
@@ -125,15 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    // Signed in successfully
                     const user = userCredential.user;
                     authMessage.textContent = 'লগইন সফল! ড্যাশবোর্ডে রিডাইরেক্ট করা হচ্ছে...';
                     authMessage.classList.add('success');
                     console.log("Logged in user:", user);
-                    // Redirect to dashboard on successful login
                     setTimeout(() => {
                         window.location.href = 'dashboard.html';
-                    }, 1500); // Give time for message to display
+                    }, 1500);
                 })
                 .catch((error) => {
                     let errorMessage = 'লগইন ব্যর্থ হয়েছে।';
@@ -141,6 +127,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         errorMessage = 'ভুল ইমেইল বা পাসওয়ার্ড।';
                     } else if (error.code === 'auth/invalid-email') {
                         errorMessage = 'বৈধ ইমেইল ফরম্যাট দিন।';
+                    } else if (error.code === 'auth/network-request-failed') {
+                        errorMessage = 'ইন্টারনেট সংযোগ সমস্যা বা সার্ভার অনুপলব্ধ।';
+                    } else if (error.code === 'auth/too-many-requests') {
+                         errorMessage = 'অনেক বেশি লগইন প্রচেষ্টা। কিছুক্ষণ পর আবার চেষ্টা করুন।';
                     }
                     authMessage.textContent = `ত্রুটি: ${errorMessage}`;
                     authMessage.classList.add('error');
@@ -149,17 +139,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Signup Form Submission
     if (signupForm) {
         signupForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault();
             clearAuthMessage();
 
             const username = document.getElementById('signup-username').value;
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
 
-            // Basic client-side validation
             if (!username || !email || !password) {
                 authMessage.textContent = 'দয়া করে সব ফিল্ড পূরণ করুন।';
                 authMessage.classList.add('error');
@@ -177,25 +165,18 @@ document.addEventListener('DOMContentLoaded', function() {
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    // Save user data to Firestore
                     return db.collection('users').doc(user.uid).set({
                         username: username,
                         email: email,
-                        // You can add more user data here if needed, e.g., default role
                     });
                 })
                 .then(() => {
                     authMessage.textContent = 'রেজিস্ট্রেশন সফল! এখন লগইন করুন।';
                     authMessage.classList.add('success');
-                    // Optionally, send email verification
-                    // if (auth.currentUser) {
-                    //     auth.currentUser.sendEmailVerification().then(() => {
-                    //         console.log("Email verification sent.");
-                    //     });
-                    // }
+                    console.log("User signed up and data saved to Firestore:");
                     setTimeout(() => {
-                        switchForm('login'); // Switch to login tab after successful signup
-                        if (signupForm) signupForm.reset(); // Clear signup form
+                        switchForm('login');
+                        if (signupForm) signupForm.reset();
                     }, 1500);
                 })
                 .catch((error) => {
@@ -206,6 +187,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         errorMessage = 'বৈধ ইমেইল ফরম্যাট দিন।';
                     } else if (error.code === 'auth/weak-password') {
                         errorMessage = 'পাসওয়ার্ডটি খুব দুর্বল। আরও শক্তিশালী পাসওয়ার্ড ব্যবহার করুন।';
+                    } else if (error.code === 'auth/operation-not-allowed') {
+                        errorMessage = 'রেজিস্ট্রেশন ফাংশন Firebase কনসোলে সক্রিয় করা নেই।';
                     }
                     authMessage.textContent = `ত্রুটি: ${errorMessage}`;
                     authMessage.classList.add('error');
@@ -214,12 +197,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- Password Reset Function (optional, if you add a button for it) ---
-    // You'll need a way to trigger this, e.g., a "Forgot Password?" link/button
-    // For example, in loginForm, add: <div class="link" onclick="handleResetPassword()">পাসওয়ার্ড ভুলে গেছেন?</div>
     window.handleResetPassword = function() {
         clearAuthMessage();
-        const emailInput = document.getElementById('login-email'); // Get email from login form
+        const emailInput = document.getElementById('login-email');
         const emailVal = emailInput ? emailInput.value : '';
 
         if (!emailVal) {
@@ -232,7 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(() => {
                 authMessage.textContent = 'পাসওয়ার্ড রিসেট লিঙ্ক আপনার ইমেইলে পাঠানো হয়েছে!';
                 authMessage.classList.add('success');
-                // Optionally clear email field after sending
                 if (emailInput) emailInput.value = '';
             })
             .catch((error) => {
@@ -253,31 +232,38 @@ document.addEventListener('DOMContentLoaded', function() {
 // --- Global Firebase Auth State Listener (for dashboard.html and protecting pages) ---
 // This runs whenever the user's login state changes (on page load, login, logout)
 auth.onAuthStateChanged(user => {
-    const path = window.location.pathname;
+    // Get the full path, e.g., "/starshop/index.html" or "/starshop/"
+    const currentPath = window.location.pathname;
 
-    // Redirect to dashboard if user is logged in and on a public page
-    // Ensure this logic doesn't create infinite redirects
+    // Check if the current path includes the base directory (e.g., /starshop/)
+    // This helps in GitHub Pages hosting where the root is not just '/'
+    const baseDir = '/starshop/'; // IMPORTANT: Adjust this if your base directory changes
+
+    // Get the relative path (e.g., "index.html" or "")
+    const relativePath = currentPath.startsWith(baseDir) ? currentPath.substring(baseDir.length) : currentPath;
+
+    // List of public pages that logged-in users should be redirected *from*
+    const publicPages = ['index.html', '', 'browse.html', 'categories.html', 'about.html']; // '' covers the base URL like /starshop/
+
+    // List of protected pages that logged-out users should be redirected *from*
+    const protectedPages = ['dashboard.html'];
+
+
     if (user) {
         // User is signed in
-        // If they are on index.html, browse.html, categories.html, about.html, redirect them to dashboard.html
-        // Make sure not to redirect if they are already on dashboard.html
-        if (!path.includes('dashboard.html') &&
-            (path.includes('index.html') || path === '/' || // For root path or index.html
-             path.includes('browse.html') ||
-             path.includes('categories.html') ||
-             path.includes('about.html'))) {
-            // Don't redirect if the modal is currently open and they are trying to sign up/in
-            // This check might need more refinement based on specific UI
-            const authModal = document.getElementById('auth-modal');
-            if (!authModal || authModal.style.display !== 'flex') {
+        // If they are on a public page, redirect them to dashboard.html
+        if (publicPages.includes(relativePath) || (relativePath === '' && currentPath === baseDir)) { // Check for base URL specifically
+             const authModal = document.getElementById('auth-modal');
+             // Only redirect if the modal is NOT currently open
+             if (!authModal || authModal.style.display !== 'flex') {
                 window.location.href = 'dashboard.html';
-            }
+             }
         }
     } else {
         // User is signed out
-        // If they are on dashboard.html, redirect them back to index.html (or login modal)
-        if (path.includes('dashboard.html')) {
-            window.location.href = 'index.html'; // Or you could show the modal automatically
+        // If they are on a protected page (like dashboard.html), redirect them back to index.html
+        if (protectedPages.includes(relativePath)) {
+            window.location.href = 'index.html';
         }
     }
 });
