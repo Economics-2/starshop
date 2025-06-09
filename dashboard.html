@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ড্যাশবোর্ড</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Your existing CSS for dashboard.html */
+        /* Your existing dashboard-specific CSS */
         body {
             font-family: 'Hind Siliguri', sans-serif;
             background-color: #e0f2f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; /* Changed to flex for header + content */
+            flex-direction: column; /* Stack header and content vertically */
             min-height: 100vh;
             margin: 0;
             color: #333;
@@ -25,6 +25,8 @@
             text-align: center;
             width: 90%;
             max-width: 600px;
+            margin: 20px auto; /* Center the dashboard content below header */
+            flex-grow: 1; /* Allow content to grow and push footer down */
         }
         h1 {
             color: #007bff;
@@ -42,14 +44,40 @@
         button:hover {
             background-color: #c82333;
         }
+        /* Add styles for .main-header, .main-nav, .logo from your style.css if needed */
     </style>
 </head>
 <body>
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo"><a href="index.html">My eBook Hub</a></h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse Books</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#" id="logout-btn-nav">Logout</a></li> </ul>
+            </nav>
+        </div>
+    </header>
+
     <div class="dashboard-content">
         <h1>আপনার ড্যাশবোর্ডে স্বাগতম!</h1>
-        <p id="dashboard-welcome-message">...</p> <p>আপনি সফলভাবে লগইন করেছেন। এখানে আপনার ব্যক্তিগত বিষয়বস্তু এবং কার্যকারিতা থাকবে।</p>
-        <button id="logoutBtn">লগআউট</button>
-    </div>
+        <p id="dashboard-welcome-message">...</p>
+        <p>আপনি সফলভাবে লগইন করেছেন। এখানে আপনার ব্যক্তিগত বিষয়বস্তু এবং কার্যকারিতা থাকবে।</p>
+        <button id="logoutBtn">লগআউট</button> </div>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Monjurul. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/Economics-2" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://github.com/Economics-2" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/Economics-2" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
@@ -70,14 +98,25 @@
         const auth = firebase.auth();
         const db = firebase.firestore(); // If you need firestore on dashboard
 
-        // Logout button functionality
-        document.getElementById('logoutBtn').addEventListener('click', () => {
+        // Function to handle logout
+        function handleLogout() {
             auth.signOut().then(() => {
                 window.location.href = 'index.html'; // Redirect back to index/login page
             }).catch((error) => {
                 console.error("লগআউট ত্রুটি:", error);
             });
-        });
+        }
+
+        // Attach logout to both buttons
+        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+        const logoutNavBtn = document.getElementById('logout-btn-nav');
+        if (logoutNavBtn) {
+            logoutNavBtn.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default link behavior
+                handleLogout();
+            });
+        }
+
 
         // Check if user is logged in when dashboard page loads
         auth.onAuthStateChanged(user => {
@@ -85,7 +124,6 @@
                 // User is signed in. You can fetch and display user-specific data here.
                 const welcomeMessage = document.getElementById('dashboard-welcome-message');
                 if (welcomeMessage) {
-                    // Fetch username from Firestore if stored there
                     db.collection('users').doc(user.uid).get().then(doc => {
                         if (doc.exists) {
                             const userData = doc.data();
