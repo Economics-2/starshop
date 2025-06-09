@@ -1,3 +1,127 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Get references to elements
+    const authModal = document.getElementById('auth-modal');
+    const openAuthModalBtn = document.getElementById('open-auth-modal-btn'); // The new ID for your header button
+    const closeButtons = document.querySelectorAll('#auth-modal .close-button'); // Select close buttons inside auth modal
+    const tabButtons = authModal.querySelectorAll('.tab-button');
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const authMessage = document.getElementById('auth-message');
+
+    // Functions to show/hide modal
+    function showAuthModal() {
+        authModal.style.display = 'flex'; // Use flex to center the modal content
+        clearAuthMessage();
+        // Optionally, reset forms when opening
+        loginForm.reset();
+        signupForm.reset();
+        switchForm('login'); // Default to login tab when opening
+    }
+
+    function hideAuthModal() {
+        authModal.style.display = 'none';
+        clearAuthMessage();
+    }
+
+    // Function to switch between login and signup forms
+    function switchForm(targetTab) {
+        tabButtons.forEach(button => button.classList.remove('active'));
+        loginForm.classList.remove('active');
+        signupForm.classList.remove('active');
+        clearAuthMessage();
+
+        if (targetTab === 'login') {
+            document.querySelector('.tab-button[data-tab="login"]').classList.add('active');
+            loginForm.classList.add('active');
+        } else if (targetTab === 'signup') {
+            document.querySelector('.tab-button[data-tab="signup"]').classList.add('active');
+            signupForm.classList.add('active');
+        }
+    }
+
+    // Helper to clear auth messages
+    function clearAuthMessage() {
+        authMessage.textContent = '';
+        authMessage.className = 'auth-message'; // Reset classes
+    }
+
+    // Event Listeners for the modal
+    if (openAuthModalBtn) {
+        openAuthModalBtn.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the # from changing URL
+            showAuthModal();
+        });
+    }
+
+    closeButtons.forEach(button => {
+        button.addEventListener('click', hideAuthModal);
+    });
+
+    // Close modal if clicking outside content
+    window.addEventListener('click', function(event) {
+        if (event.target === authModal) {
+            hideAuthModal();
+        }
+    });
+
+    // Tab button functionality
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
+            switchForm(targetTab);
+        });
+    });
+
+    // --- Form Submission Handlers (Add your Firebase login/signup logic here) ---
+    // Placeholder for login submission (replace with your actual Firebase auth logic)
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        clearAuthMessage();
+
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        // In a real application, you'd integrate Firebase Auth here
+        // Example: firebase.auth().signInWithEmailAndPassword(email, password)
+        // For demonstration:
+        if (email === "test@example.com" && password === "password123") {
+            authMessage.textContent = "Login successful!";
+            authMessage.classList.add('success');
+            setTimeout(hideAuthModal, 1500); // Hide modal after a delay
+            // Here you might redirect to dashboard.html or load user content
+            // window.location.href = 'dashboard.html';
+        } else {
+            authMessage.textContent = "Invalid email or password.";
+            authMessage.classList.add('error');
+        }
+        console.log('Login attempt:', { email, password });
+    });
+
+    // Placeholder for signup submission (replace with your actual Firebase auth logic)
+    signupForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        clearAuthMessage();
+
+        const username = document.getElementById('signup-username').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+
+        // In a real application, you'd integrate Firebase Auth here
+        // Example: firebase.auth().createUserWithEmailAndPassword(email, password)
+        // For demonstration:
+        if (username && email && password.length >= 6) {
+            authMessage.textContent = "Signup successful! Please login.";
+            authMessage.classList.add('success');
+            // Optionally switch to login tab after successful signup
+            setTimeout(() => switchForm('login'), 1500);
+        } else {
+            authMessage.textContent = "Please fill all fields and ensure password is at least 6 characters.";
+            authMessage.classList.add('error');
+        }
+        console.log('Signup attempt:', { username, email, password });
+    });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const ebookListContainer = document.getElementById('ebook-list');
     const loadMoreBtn = document.getElementById('load-more-btn');
