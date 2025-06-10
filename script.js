@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'book1': {
             title: 'ছন্দোবদ্ধ বাংলা কোরআন',
             author: 'PANNA CHOUDHURY.',
-            cover: 'smr.png?text=Book+1',
+            cover: 'https://via.placeholder.com/150/FF5733/FFFFFF?text=Book+1',
             description: '"Chondo Boddho Bangla Quran" (ছন্দোবদ্ধ বাংলা কোরআন) is a Bengali-language version of the Quran, specifically translated into verse form. This translation aims to make the Quran more accessible and enjoyable for Bengali speakers by using poetry to convey the meaning of the verses. The name "Chondo Boddho" translates to "verse-bound" or "metrical", indicating its poetic form. 
 .',
             pages: 700,
