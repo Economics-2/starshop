@@ -1,6 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(120deg, #f0f4ff 0%, #f9fafc 100%);
+    color: #222;
+  }
+  .main-header, .main-footer {
+    background: #23395d;
+    color: #fff;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .cta-button, .load-more-btn {
+    background: #3763db;
+    color: #fff;
+    border-radius: 25px;
+    padding: 12px 32px;
+    font-weight: bold;
+    transition: background 0.2s;
+    border: none;
+    box-shadow: 0 2px 8px rgba(55,99,219,0.1);
+    cursor: pointer;
+  }
+  .cta-button:hover, .load-more-btn:hover {
+    background: #23395d;
+  }
+  .ebook-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .ebook-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 10px rgba(34,57,93,0.1);
+    padding: 1.2rem;
+    transition: transform 0.2s;
+  }
+  .ebook-card:hover {
+    transform: translateY(-8px) scale(1.03);
+  }
+  /* Modal styling improvements */
+  .modal-content {
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(55,99,219,0.18);
+  }
+</style>
+
+    
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-29YE1Y9G9E"></script>
 <script>
