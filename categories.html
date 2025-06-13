@@ -2,34 +2,34 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-29YE1Y9G9E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-29YE1Y9G9E');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-29YE1Y9G9E"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-29YE1Y9G9E');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My eBook & PDF Library - GitHub</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
 <body>
     <header class="main-header">
-    <div class="container header-content">
-        <h1 class="logo"><a href="index.html">My eBook Hub</a></h1>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="browse.html">Browse Books</a></li>
-                <li><a href="categories.html">Categories</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="#" id="open-auth-modal-btn">Login/Signup</a></li> </ul>
-        </nav>
-    </div>
-</header>
+        <div class="container header-content">
+            <h1 class="logo"><a href="index.html">My eBook Hub</a></h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse Books</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#" id="open-auth-modal-btn">Login/Signup</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
     <section class="banner" id="home">
         <div class="container banner-content">
@@ -43,18 +43,20 @@
         <section class="ebook-grid-section">
             <h2>Featured eBooks & PDFs</h2>
             <div class="ebook-grid" id="ebook-list">
-                </div>
+                <!-- eBooks will be dynamically loaded here -->
+            </div>
             <button class="load-more-btn" id="load-more-btn">Load More</button>
         </section>
     </main>
 
+    <!-- eBook Modal -->
     <div id="ebook-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
+            <span class="close-button" tabindex="0" aria-label="Close">&times;</span>
             <div class="modal-body">
-                <h3>eBook Title</h3>
-                <img src="" alt="eBook Cover" class="modal-cover">
-                <p class="modal-description"></p>
+                <h3 id="modal-title">eBook Title</h3>
+                <img src="" alt="eBook Cover" class="modal-cover" id="modal-cover">
+                <p class="modal-description" id="modal-description"></p>
                 <div class="modal-details">
                     <p><strong>Author:</strong> <span id="modal-author"></span></p>
                     <p><strong>Pages:</strong> <span id="modal-pages"></span></p>
@@ -65,51 +67,52 @@
                     <div class="preview-page" data-page="1">Page 1 content...</div>
                     <div class="preview-page" data-page="2">Page 2 content...</div>
                     <div class="preview-navigation">
-                        <button class="prev-page-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="prev-page-btn" aria-label="Previous Page"><i class="fas fa-chevron-left"></i></button>
                         <span id="current-preview-page">1</span> / <span id="total-preview-pages">5</span>
-                        <button class="next-page-btn"><i class="fas fa-chevron-right"></i></button>
+                        <button class="next-page-btn" aria-label="Next Page"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
                 <div class="modal-actions">
-                    <a href="#" class="download-btn" target="_blank"><i class="fas fa-download"></i> Download PDF</a>
-                    <a href="#" class="demo-file-btn" target="_blank"><i class="fas fa-file-alt"></i> Demo File</a>
+                    <a href="#" class="download-btn" id="download-btn" target="_blank" rel="noopener"><i class="fas fa-download"></i> Download PDF</a>
+                    <a href="#" class="demo-file-btn" id="demo-file-btn" target="_blank" rel="noopener"><i class="fas fa-file-alt"></i> Demo File</a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Authentication Modal -->
     <div id="auth-modal" class="modal">
         <div class="modal-content auth-form">
-            <span class="close-button">&times;</span>
+            <span class="close-button" tabindex="0" aria-label="Close">&times;</span>
             <div class="form-tabs">
-                <button class="tab-button active" data-tab="login">Login</button>
-                <button class="tab-button" data-tab="signup">Sign Up</button>
+                <button class="tab-button active" data-tab="login" type="button">Login</button>
+                <button class="tab-button" data-tab="signup" type="button">Sign Up</button>
             </div>
-            <form id="login-form" class="auth-form-content active">
+            <form id="login-form" class="auth-form-content active" autocomplete="on">
                 <h3>Login</h3>
                 <div class="form-group">
                     <label for="login-email">Email:</label>
-                    <input type="email" id="login-email" required>
+                    <input type="email" id="login-email" required autocomplete="username">
                 </div>
                 <div class="form-group">
                     <label for="login-password">Password:</label>
-                    <input type="password" id="login-password" required>
+                    <input type="password" id="login-password" required autocomplete="current-password">
                 </div>
                 <button type="submit" class="submit-btn">Login</button>
             </form>
-            <form id="signup-form" class="auth-form-content">
+            <form id="signup-form" class="auth-form-content" autocomplete="on">
                 <h3>Sign Up</h3>
                 <div class="form-group">
                     <label for="signup-username">Username:</label>
-                    <input type="text" id="signup-username" required>
+                    <input type="text" id="signup-username" required autocomplete="username">
                 </div>
                 <div class="form-group">
                     <label for="signup-email">Email:</label>
-                    <input type="email" id="signup-email" required>
+                    <input type="email" id="signup-email" required autocomplete="email">
                 </div>
                 <div class="form-group">
                     <label for="signup-password">Password:</label>
-                    <input type="password" id="signup-password" required>
+                    <input type="password" id="signup-password" required autocomplete="new-password">
                 </div>
                 <button type="submit" class="submit-btn">Sign Up</button>
             </form>
@@ -117,20 +120,20 @@
         </div>
     </div>
 
-
     <footer class="main-footer">
         <div class="container footer-content">
             <p>&copy; 2025 My eBook Hub. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/yourusername" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <!-- Firebase and App Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
