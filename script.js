@@ -350,4 +350,36 @@ if ($('#theme-toggle-btn')) {
         document.body.classList.add('dark-mode');
 }
 
+
+// Example: Assume you have an array of eBook objects
+const ebooks = [
+  // { title: "...", author: "...", cover: "...", ... }
+];
+let currentIndex = 0;
+const itemsPerPage = 6;
+const ebookList = document.getElementById('ebook-list');
+const loadMoreBtn = document.getElementById('load-more-btn');
+
+function renderEbooks() {
+  const nextItems = ebooks.slice(currentIndex, currentIndex + itemsPerPage);
+  nextItems.forEach(ebook => {
+    const card = document.createElement('div');
+    card.className = 'ebook-card';
+    card.innerHTML = `
+      <img src="${ebook.cover}" alt="${ebook.title}" style="width:100%;border-radius:12px;">
+      <h3>${ebook.title}</h3>
+      <p>by ${ebook.author}</p>
+    `;
+    ebookList.appendChild(card);
+  });
+  currentIndex += itemsPerPage;
+  if (currentIndex >= ebooks.length) loadMoreBtn.style.display = 'none';
+}
+
+loadMoreBtn.addEventListener('click', renderEbooks);
+
+// Initial load
+renderEbooks();
+
+
 // --- Style: Add CSS for .toast and mobile/modal enhancements in your stylesheet! ---
