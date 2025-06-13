@@ -5,49 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ড্যাশবোর্ড</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Your existing dashboard-specific CSS */
+        :root {
+            --primary: #007bff;
+            --bg-light: #e0f2f7;
+            --bg-dark: #23272f;
+            --text-light: #fff;
+            --text-dark: #333;
+        }
         body {
             font-family: 'Hind Siliguri', sans-serif;
-            background-color: #e0f2f7;
-            display: flex; /* Changed to flex for header + content */
-            flex-direction: column; /* Stack header and content vertically */
-            min-height: 100vh;
+            background: var(--bg-light);
+            color: var(--text-dark);
             margin: 0;
-            color: #333;
+            min-height: 100vh;
+            transition: background 0.4s, color 0.4s;
         }
+        .dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+        .main-header, .main-footer {
+            background: var(--primary);
+            color: #fff;
+        }
+        .main-header a, .main-footer a { color: #fff; }
+        .container { max-width: 1100px; margin: auto; padding: 0 16px; }
         .dashboard-content {
-            background: white;
-            padding: 30px;
+            background: #fff;
+            padding: 32px;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.09);
+            margin: 32px auto;
+            max-width: 700px;
+        }
+        .dark-mode .dashboard-content {
+            background: #2b2d42;
+        }
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .profile-avatar {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        .stats-bar {
+            display: flex;
+            gap: 24px;
+            margin: 24px 0;
+            justify-content: center;
+        }
+        .stat {
+            background: #f5f8fa;
+            border-radius: 8px;
+            padding: 16px 24px;
             text-align: center;
-            width: 90%;
-            max-width: 600px;
-            margin: 20px auto; /* Center the dashboard content below header */
-            flex-grow: 1; /* Allow content to grow and push footer down */
         }
-        h1 {
-            color: #007bff;
+        .dark-mode .stat { background: #23272f; }
+        .actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 24px;
         }
-        button {
+        .actions button, .theme-toggle {
             padding: 10px 20px;
-            margin-top: 20px;
-            background-color: #dc3545;
-            color: white;
+            background-color: var(--primary);
+            color: #fff;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
+            transition: background 0.2s;
         }
-        button:hover {
-            background-color: #c82333;
+        .actions button:hover, .theme-toggle:hover {
+            background-color: #0056b3;
         }
-        /* Add styles for .main-header, .main-nav, .logo from your style.css if needed */
+        .theme-toggle {
+            position: absolute; top: 20px; right: 32px; background: #fff; color: var(--primary); font-size: 18px; border: 1px solid #007bff;
+        }
+        .dark-mode .theme-toggle { background: #23272f; color: #fff; }
+        .recommendations {
+            margin-top: 32px;
+        }
+        .recommendations h2 { margin-bottom: 16px; }
+        .recommendation-list {
+            display: flex; flex-wrap: wrap;
+            gap: 16px;
+        }
+        .book-card {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            width: 170px;
+            text-align: left;
+        }
+        .dark-mode .book-card { background: #23272f; }
+        .notification {
+            background: #ffecb3;
+            color: #795548;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        @media (max-width: 700px) {
+            .dashboard-content { padding: 16px; }
+            .profile-info { flex-direction: column; gap: 8px; }
+            .stats-bar { flex-direction: column; gap: 12px; }
+        }
     </style>
 </head>
 <body>
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
     <header class="main-header">
         <div class="container header-content">
             <h1 class="logo"><a href="index.html">My eBook Hub</a></h1>
@@ -57,16 +140,50 @@
                     <li><a href="browse.html">Browse Books</a></li>
                     <li><a href="categories.html">Categories</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="#" id="logout-btn-nav">Logout</a></li> </ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" id="logout-btn-nav">Logout</a></li>
+                </ul>
             </nav>
         </div>
     </header>
-
     <div class="dashboard-content">
-        <h1>আপনার ড্যাশবোর্ডে স্বাগতম!</h1>
-        <p id="dashboard-welcome-message">...</p>
-        <p>আপনি সফলভাবে লগইন করেছেন। এখানে আপনার ব্যক্তিগত বিষয়বস্তু এবং কার্যকারিতা থাকবে।</p>
-        <button id="logoutBtn">লগআউট</button> </div>
+        <div class="dashboard-header">
+            <div class="profile-info">
+                <div class="profile-avatar" id="profileAvatar"><i class="fas fa-user"></i></div>
+                <div>
+                    <h2 id="dashboard-welcome-message">...</h2>
+                    <div id="user-email"></div>
+                </div>
+            </div>
+        </div>
+        <div class="notification" id="notification" style="display:none;"></div>
+        <div class="stats-bar" id="statsBar">
+            <div class="stat">
+                <div style="font-size:24px;"><i class="fas fa-book"></i></div>
+                <div>My Books</div>
+                <div id="myBooksCount">0</div>
+            </div>
+            <div class="stat">
+                <div style="font-size:24px;"><i class="fas fa-heart"></i></div>
+                <div>Favorites</div>
+                <div id="favoritesCount">0</div>
+            </div>
+            <div class="stat">
+                <div style="font-size:24px;"><i class="fas fa-clock"></i></div>
+                <div>Recent Reads</div>
+                <div id="recentReadsCount">0</div>
+            </div>
+        </div>
+        <div class="actions">
+            <button onclick="window.location='browse.html'"><i class="fas fa-search"></i> Browse Books</button>
+            <button onclick="window.location='categories.html'"><i class="fas fa-list"></i> Categories</button>
+            <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> লগআউট</button>
+        </div>
+        <div class="recommendations">
+            <h2>আপনার জন্য সুপারিশকৃত বইসমূহ</h2>
+            <div class="recommendation-list" id="recommendationList"></div>
+        </div>
+    </div>
 
     <footer class="main-footer">
         <div class="container footer-content">
@@ -79,65 +196,112 @@
         </div>
     </footer>
 
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
-
     <script>
-        // Initialize Firebase - MUST BE HERE AGAIN FOR THIS SEPARATE PAGE
+        // Firebase config
         const firebaseConfig = {
-            apiKey: "AIzaSyCVyXmjKI9pL37LJXkVcWMPtZSaXZG802c", // Use your actual config
+            apiKey: "AIzaSyCVyXmjKI9pL37LJXkVcWMPtZSaXZG802c",
             authDomain: "loginpage-6cb4a.firebaseapp.com",
             projectId: "loginpage-6cb4a",
-            storageBucket: "loginpage-6cb4a.firebasestorage.app",
+            storageBucket: "loginpage-6cb4a.appspot.com",
             messagingSenderId: "475440251033",
             appId: "1:475440251033:web:1a9b2343c07fe4a996b808",
             measurementId: "G-ZLG460T4KR"
         };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-        const db = firebase.firestore(); // If you need firestore on dashboard
+        const db = firebase.firestore();
 
-        // Function to handle logout
-        function handleLogout() {
-            auth.signOut().then(() => {
-                window.location.href = 'index.html'; // Redirect back to index/login page
-            }).catch((error) => {
-                console.error("লগআউট ত্রুটি:", error);
-            });
+        // Theme toggle logic
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+            themeToggle.innerHTML = document.body.classList.contains('dark-mode') ?
+                '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+        // Load theme preference
+        if(localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
 
-        // Attach logout to both buttons
+        // Logout logic
+        function handleLogout() {
+            auth.signOut().then(() => {
+                window.location.href = 'index.html';
+            }).catch((error) => {
+                displayNotification("লগআউট ত্রুটি: " + error.message, true);
+            });
+        }
         document.getElementById('logoutBtn').addEventListener('click', handleLogout);
         const logoutNavBtn = document.getElementById('logout-btn-nav');
         if (logoutNavBtn) {
             logoutNavBtn.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default link behavior
-                handleLogout();
+                e.preventDefault(); handleLogout();
             });
         }
 
+        // Notification helper
+        function displayNotification(message, isError = false) {
+            const notif = document.getElementById('notification');
+            notif.textContent = message;
+            notif.style.background = isError ? '#ffcdd2' : '#ffecb3';
+            notif.style.color = isError ? '#c62828' : '#795548';
+            notif.style.display = 'block';
+            setTimeout(() => { notif.style.display = 'none'; }, 4000);
+        }
 
-        // Check if user is logged in when dashboard page loads
-        auth.onAuthStateChanged(user => {
+        // Dashboard user logic
+        auth.onAuthStateChanged(async user => {
             if (user) {
-                // User is signed in. You can fetch and display user-specific data here.
+                // Profile section
                 const welcomeMessage = document.getElementById('dashboard-welcome-message');
-                if (welcomeMessage) {
-                    db.collection('users').doc(user.uid).get().then(doc => {
-                        if (doc.exists) {
-                            const userData = doc.data();
-                            welcomeMessage.textContent = `স্বাগতম, ${userData.username || user.email}!`;
-                        } else {
-                            welcomeMessage.textContent = `স্বাগতম, ${user.email}!`;
+                const userEmail = document.getElementById('user-email');
+                const profileAvatar = document.getElementById('profileAvatar');
+                if (welcomeMessage && userEmail && profileAvatar) {
+                    const doc = await db.collection('users').doc(user.uid).get();
+                    let username = user.email;
+                    let avatar = '<i class="fas fa-user"></i>';
+                    if (doc.exists) {
+                        const userData = doc.data();
+                        username = userData.username || user.email;
+                        if (userData.avatarUrl) {
+                            avatar = `<img src="${userData.avatarUrl}" alt="Avatar" style="width:60px;height:60px;border-radius:50%;">`;
                         }
-                    }).catch(error => {
-                        console.error("Error fetching user data:", error);
-                        welcomeMessage.textContent = `স্বাগতম, ${user.email}!`;
-                    });
+                    }
+                    welcomeMessage.textContent = `স্বাগতম, ${username}!`;
+                    userEmail.textContent = user.email;
+                    profileAvatar.innerHTML = avatar;
                 }
+                // Stats (demo logic)
+                db.collection('books').where('owner', '==', user.uid).get().then(snap => {
+                    document.getElementById('myBooksCount').textContent = snap.size;
+                });
+                db.collection('favorites').where('user', '==', user.uid).get().then(snap => {
+                    document.getElementById('favoritesCount').textContent = snap.size;
+                });
+                db.collection('reads').where('user', '==', user.uid).get().then(snap => {
+                    document.getElementById('recentReadsCount').textContent = snap.size;
+                });
+
+                // Recommendations (demo logic)
+                db.collection('books').limit(5).get().then(snapshot => {
+                    const recList = document.getElementById('recommendationList');
+                    recList.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const book = doc.data();
+                        const card = document.createElement('div');
+                        card.className = 'book-card';
+                        card.innerHTML = `<strong>${book.title}</strong><br>
+                            <span>${book.author || ''}</span>`;
+                        recList.appendChild(card);
+                    });
+                });
             } else {
-                // No user is signed in, redirect to index.html (login page)
                 window.location.href = 'index.html';
             }
         });
