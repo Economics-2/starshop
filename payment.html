@@ -1,1 +1,143 @@
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfnfScVG7gJrueWaD3DQoNBNdkQLDbt8G_2uXWMp8-Dqn6weg/viewform?embedded=true" width="640" height="1289" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Payment | StarShop</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f4f9;
+      color: #222;
+    }
+    header {
+      background: #3f51b5;
+      color: white;
+      padding: 1.5rem 1rem 1rem 1rem;
+      text-align: center;
+      border-radius: 0 0 1.5rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(63,81,181,0.12);
+      letter-spacing: 2px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 1rem;
+    }
+    .instructions {
+      font-size: 1.1rem;
+      margin: 1rem 0 2rem 0;
+      color: #444;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 150%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 1px 8px rgba(63,81,181,0.07);
+      background: #fafaff;
+    }
+    .iframe-container iframe {
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 1rem;
+      background: transparent;
+    }
+    .contact-info {
+      margin: 2rem 0 1rem 0;
+      text-align: center;
+      font-size: 1rem;
+      color: #666;
+    }
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #3f51b5;
+      color: #fff;
+      border: none;
+      outline: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(63,81,181,0.18);
+      display: none;
+      transition: background 0.2s;
+      z-index: 1000;
+    }
+    .scroll-top:hover {
+      background: #283593;
+    }
+    @media (max-width: 700px) {
+      .container {
+        margin: 0.5rem;
+        padding: 0.5rem;
+      }
+      .iframe-container {
+        padding-bottom: 180%;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        font-size: 1.3rem;
+        padding: 1rem 0.5rem;
+      }
+      .container {
+        padding: 0.3rem;
+      }
+      .instructions {
+        font-size: 1rem;
+      }
+      .iframe-container {
+        padding-bottom: 220%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>StarShop: Secure Payment Portal</h1>
+  </header>
+  <div class="container">
+    <div class="instructions">
+      Please complete the secure payment form below.<br>
+      <strong>All transactions are encrypted & confidential.</strong>
+    </div>
+    <div class="iframe-container">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfnfScVG7gJrueWaD3DQoNBNdkQLDbt8G_2uXWMp8-Dqn6weg/viewform?embedded=true" allowfullscreen title="StarShop Payment Form"></iframe>
+    </div>
+    <div class="contact-info">
+      Need help? Email us at <a href="mailto:support@starshop.example" style="color:#3f51b5;text-decoration:underline;">support@starshop.example</a><br>
+      Or call: +1 234 567 8901
+    </div>
+  </div>
+  <button class="scroll-top" aria-label="Scroll to top" id="scrollTopBtn">&#8679;</button>
+  <script>
+    // Show scroll-to-top button when scrolling down
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollBtn.style.display = "block";
+      } else {
+        scrollBtn.style.display = "none";
+      }
+    };
+    scrollBtn.onclick = function() {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+  </script>
+</body>
+</html>
