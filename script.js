@@ -239,16 +239,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- eBook Data (Dummy Data for now, replace with Firestore later) ---
     const ebooksData = {
         'book1': {
-            title: 'ছন্দোবদ্ধ বাংলা কোরআন',
-            author: 'PANNA CHOUDHURY.',
+            title: 'The Great Adventure',
+            author: 'Jane Doe',
             cover: 'https://via.placeholder.com/150/FF5733/FFFFFF?text=Book+1',
-            description: '"Chondo Boddho Bangla Quran" (ছন্দোবদ্ধ বাংলা কোরআন) is a Bengali-language version of the Quran, specifically translated into verse form. This translation aims to make the Quran more accessible and enjoyable for Bengali speakers by using poetry to convey the meaning of the verses. The name "Chondo Boddho" translates to "verse-bound" or "metrical", indicating its poetic form. 
-.',
-            pages: 700,
+            description: 'Join a thrilling journey through unknown lands and discover ancient secrets. This book is a fantasy epic filled with magic, mystery, and memorable characters.',
+            pages: 320,
             fileSize: '5.2 MB',
-            category: 'Quran',
-            pdfLink: 'ChondoBodhdho-Bangla-Quran.pdf', // Replace with your actual PDF path
-            demoLink: 'ChondoBodhdho-Bangla-Quran.pdf' // Replace with your actual demo file path
+            category: 'Fiction',
+            pdfLink: 'download.pdf', // Replace with your actual PDF path
+            demoLink: 'download.pdf' // Replace with your actual demo file path
         },
         'book2': {
             title: 'Coding Fundamentals',
