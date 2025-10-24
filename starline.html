@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarLine-AI চ্যানেলের সেরা ২০ AI ভিডিও টিউটোরিয়াল</title>
+    <!-- Tailwind CSS লোড করা হচ্ছে -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* ফন্ট হিসেবে ইন্টার ও নোটো ব্যবহার করা হচ্ছে */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap');
+        body {
+            font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+            background-color: #f7f9fc;
+            line-height: 1.6;
+            color: #1a202c;
+        }
+        .container-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .header-bg {
+            background-image: linear-gradient(to right, #0575e6, #021b79); /* Gradient Blue */
+        }
+        .video-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Header/Hero Section -->
+    <header class="header-bg text-white shadow-xl py-12 mb-8">
+        <div class="container-main text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-3">StarLine-AI: সর্বাধিক দেখা ২০ AI ভিডিও গাইড</h1>
+            <p class="text-xl sm:text-2xl font-light">কৃত্রিম বুদ্ধিমত্তা ও ভিডিও জেনারেশন সংক্রান্ত জনপ্রিয় বাংলা টিউটোরিয়াল</p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container-main">
+        <section id="video-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Video Cards will be inserted here by JavaScript -->
+        </section>
+        
+        <!-- Loading message/fallback -->
+        <div id="loading-message" class="text-center p-10 text-gray-500 text-lg hidden">
+            ভিডিও লোড হচ্ছে...
+        </div>
+        <div id="no-results" class="text-center p-10 text-gray-500 text-lg hidden">
+            দুঃখিত, এই সংক্রান্ত কোনো বাংলা টিউটোরিয়াল ভিডিও পাওয়া যায়নি।
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+        <p class="text-sm">ডেটা সোর্স: StarLine-AI চ্যানেলের অনুমিত ২০টি সর্বাধিক দেখা ভিডিওর নকল ডেটা।</p>
+    </footer>
+
+    <!-- JavaScript to render the video data -->
+    <script>
+        // ভিডিও ডেটা (StarLine-AI চ্যানেলের অনুমিত ২০টি সর্বাধিক দেখা ভিডিও, ভিউ সংখ্যা অনুযায়ী সাজানো)
+        const videoData = [
+            {
+                title: "AI দিয়ে প্রতি মাসে ৫০০ ডলার আয় করুন | A to Z গাইডলাইন | StarLine-AI",
+                channel: "StarLine-AI",
+                views: 980500,
+                date: "2025-05-01",
+                url: "http://www.youtube.com/watch?v=Star1A",
+                videoId: "Star1A"
+            },
+            {
+                title: "Google VEO-3 বনাম OpenAI Sora: সেরা AI ভিডিও জেনারেটর কোনটি?",
+                channel: "StarLine-AI",
+                views: 810230,
+                date: "2025-06-15",
+                url: "http://www.youtube.com/watch?v=Star2B",
+                videoId: "Star2B"
+            },
+            {
+                title: "৫ মিনিটে AI ব্যবহার করে প্রফেশনাল প্রেজেন্টেশন তৈরি করুন!",
+                channel: "StarLine-AI",
+                views: 755900,
+                date: "2025-07-01",
+                url: "http://www.youtube.com/watch?v=Star3C",
+                videoId: "Star3C"
+            },
+            {
+                title: "নতুন AI মডেল Gemini 2.5 Pro এর সেরা ৫টি ফিচার যা আপনার জানা উচিত",
+                channel: "StarLine-AI",
+                views: 690450,
+                date: "2025-08-10",
+                url: "http://www.youtube.com/watch?v=Star4D",
+                videoId: "Star4D"
+            },
+            {
+                title: "সম্পূর্ণ ফ্রিতে AI ছবি তৈরি করুন (বেস্ট ৫টি টুলস)",
+                channel: "StarLine-AI",
+                views: 520800,
+                date: "2025-04-20",
+                url: "http://www.youtube.com/watch?v=Star5E",
+                videoId: "Star5E"
+            },
+            {
+                title: "AI ভয়েস ক্লোনিং: আপনার ভয়েস দিয়ে গান তৈরি করুন (টিউটোরিয়াল)",
+                channel: "StarLine-AI",
+                views: 480120,
+                date: "2025-09-01",
+                url: "http://www.youtube.com/watch?v=Star6F",
+                videoId: "Star6F"
+            },
+            {
+                title: "Chatbot তৈরি করে কিভাবে ক্লায়েন্ট পাবেন? | Beginners Guide",
+                channel: "StarLine-AI",
+                views: 450000,
+                date: "2025-03-10",
+                url: "http://www.youtube.com/watch?v=Star7G",
+                videoId: "Star7G"
+            },
+            {
+                title: "AI দিয়ে সোশ্যাল মিডিয়া কন্টেন্ট অটোমেশন (সেরা ৩টি পদ্ধতি)",
+                channel: "StarLine-AI",
+                views: 390700,
+                date: "2025-07-25",
+                url: "http://www.youtube.com/watch?v=Star8H",
+                videoId: "Star8H"
+            },
+            {
+                title: "AI দিয়ে স্ক্রিপ্ট লেখা ও ভয়েস ওভার তৈরি: ইউটিউব শর্টস টিপস",
+                channel: "StarLine-AI",
+                views: 350200,
+                date: "2025-06-01",
+                url: "http://www.youtube.com/watch?v=Star9I",
+                videoId: "Star9I"
+            },
+            {
+                title: "AI টুলস ব্যবহার করে ডাটা এন্ট্রি এবং ফ্রিল্যান্সিং এর কাজ",
+                channel: "StarLine-AI",
+                views: 301000,
+                date: "2025-08-05",
+                url: "http://www.youtube.com/watch?v=Star10J",
+                videoId: "Star10J"
+            },
+            {
+                title: "কৃত্রিম বুদ্ধিমত্তার ভবিষ্যৎ: ২০৩০ সালে আমাদের জীবন কেমন হবে?",
+                channel: "StarLine-AI",
+                views: 295500,
+                date: "2025-01-01",
+                url: "http://www.youtube.com/watch?v=Star11K",
+                videoId: "Star11K"
+            },
+            {
+                title: "AI মিউজিক জেনারেটর: কপিরাইট-মুক্ত গান তৈরি করুন",
+                channel: "StarLine-AI",
+                views: 280100,
+                date: "2025-05-15",
+                url: "http://www.youtube.com/watch?v=Star12L",
+                videoId: "Star12L"
+            },
+            {
+                title: "ফ্রিতে AI দিয়ে ওয়েবসাইট তৈরি: এক ঘন্টার টিউটোরিয়াল",
+                channel: "StarLine-AI",
+                views: 265400,
+                date: "2025-09-15",
+                url: "http://www.youtube.com/watch?v=Star13M",
+                videoId: "Star13M"
+            },
+            {
+                title: "AI কোডিং অ্যাসিস্ট্যান্ট ব্যবহার করে কোডিং দ্রুত করুন",
+                channel: "StarLine-AI",
+                views: 250900,
+                date: "2025-04-01",
+                url: "http://www.youtube.com/watch?v=Star14N",
+                videoId: "Star14N"
+            },
+            {
+                title: "AI এর মাধ্যমে আপনার ডিজাইন স্কিল আপগ্রেড করুন",
+                channel: "StarLine-AI",
+                views: 240000,
+                date: "2025-07-05",
+                url: "http://www.youtube.com/watch?v=Star15O",
+                videoId: "Star15O"
+            },
+            {
+                title: "AI ভিডিও এডিটিং: স্বয়ংক্রিয়ভাবে কাট ও ট্রানজিশন যোগ করুন",
+                channel: "StarLine-AI",
+                views: 230100,
+                date: "2025-08-20",
+                url: "http://www.youtube.com/watch?v=Star16P",
+                videoId: "Star16P"
+            },
+            {
+                title: "AI টুলস ব্যবহার করে দ্রুত ব্লগ পোস্ট লিখুন",
+                channel: "StarLine-AI",
+                views: 215300,
+                date: "2025-06-25",
+                url: "http://www.youtube.com/watch?v=Star17Q",
+                videoId: "Star17Q"
+            },
+            {
+                title: "AI এর সাহায্যে স্টক মার্কেটের পূর্বাভাস: টিপস এবং ট্রিকস",
+                channel: "StarLine-AI",
+                views: 205000,
+                date: "2025-03-20",
+                url: "http://www.youtube.com/watch?v=Star18R",
+                videoId: "Star18R"
+            },
+            {
+                title: "৫টি লুকানো AI টুলস যা আপনার কাজকে সহজ করবে",
+                channel: "StarLine-AI",
+                views: 195700,
+                date: "2025-09-25",
+                url: "http://www.youtube.com/watch?v=Star19S",
+                videoId: "Star19S"
+            },
+            {
+                title: "ChatGPT দিয়ে টাকা আয়ের সেরা ১০টি উপায়",
+                channel: "StarLine-AI",
+                views: 180100,
+                date: "2025-02-10",
+                url: "http://www.youtube.com/watch?v=Star20T",
+                videoId: "Star20T"
+            }
+        ];
+
+        // সংখ্যাকে বাংলায় রূপান্তর করার ফাংশন
+        function formatNumberInBangla(num) {
+            const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return String(num).replace(/[0-9]/g, (d) => banglaDigits[d]);
+        }
+        
+        // ভিউ সংখ্যাকে K/M আকারে ফরমেট করার ফাংশন
+        function formatViews(views) {
+            if (views >= 1000000) {
+                return formatNumberInBangla((views / 1000000).toFixed(1)) + 'M';
+            } else if (views >= 1000) {
+                return formatNumberInBangla((views / 1000).toFixed(1)) + 'K';
+            }
+            return formatNumberInBangla(views);
+        }
+
+        // ভিডিও কার্ড তৈরি করার ফাংশন
+        function createVideoCard(video) {
+            const viewCountFormatted = formatViews(video.views);
+            const publishDateFormatted = formatNumberInBangla(new Date(video.date).toLocaleDateString('bn-BD'));
+            
+            // ইউটিউব থাম্বনেইলের URL (mqdefault: medium quality)
+            const thumbnailUrl = `https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg`;
+
+            return `
+                <div class="video-card bg-white rounded-xl overflow-hidden shadow-lg border-2 border-transparent hover:border-blue-500">
+                    <!-- Thumbnail -->
+                    <a href="${video.url}" target="_blank" class="block relative group">
+                        <img src="${thumbnailUrl}" onerror="this.onerror=null; this.src='https://placehold.co/480x270/cccccc/333333?text=Video+Thumbnail';" alt="${video.title} Thumbnail" class="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-80">
+                        <!-- Play Icon Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 3l12 9-12 9V3z"/>
+                            </svg>
+                        </div>
+                    </a>
+                    
+                    <!-- Content -->
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">
+                            <a href="${video.url}" target="_blank" class="hover:text-blue-600 transition duration-300 line-clamp-2">${video.title}</a>
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-2">চ্যানেল: <span class="font-semibold">${video.channel}</span></p>
+                        <div class="flex flex-wrap items-center text-xs text-gray-500 space-x-3">
+                            <span>👁️ ${viewCountFormatted} ভিউ</span>
+                            <span class="text-gray-400">•</span>
+                            <span>📅 ${publishDateFormatted}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // মূল রেন্ডারিং ফাংশন
+        function renderVideos() {
+            const videoListContainer = document.getElementById('video-list');
+            
+            if (videoData.length === 0) {
+                document.getElementById('no-results').classList.remove('hidden');
+                return;
+            }
+
+            const videoHtml = videoData.map(video => createVideoCard(video)).join('');
+            videoListContainer.innerHTML = videoHtml;
+        }
+
+        // পেইজ লোড হওয়ার পরে রেন্ডার করা
+        window.onload = renderVideos;
+    </script>
+</body>
+</html>
