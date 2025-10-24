@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>৮ সেকেন্ডের ভিডিও প্রম্পট তালিকা</title>
+    <!-- Tailwind CSS লোড করা হচ্ছে -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* ফন্ট হিসেবে ইন্টার ও নোটো ব্যবহার করা হচ্ছে */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+Bengali:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+            background-color: #e5f4fb; /* Light Blue Background */
+            line-height: 1.6;
+            color: #1a202c;
+        }
+        .container-main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .card-bg {
+            background-color: #ffffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-bg:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .header-bg {
+            background-image: linear-gradient(to right, #0077b6, #00b4d8); /* Deep Blue Gradient */
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Header Section -->
+    <header class="header-bg text-white shadow-xl py-10 mb-8 rounded-b-xl">
+        <div class="container-main text-center">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-2">৮ সেকেন্ডের ভিডিও প্রম্পট তালিকা</h1>
+            <p class="text-lg sm:text-xl font-light opacity-90">৫ বছর বয়সী 'সমাধানকারী' চরিত্রের জন্য সেরা ১০টি রেডি স্ক্রিপ্ট।</p>
+        </div>
+    </header>
+
+    <!-- Main Content Area: Prompts List -->
+    <main class="container-main">
+        <div id="prompt-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Prompt Cards will be inserted here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 mt-12 text-gray-600 border-t border-gray-300">
+        <p class="text-sm">এই প্রম্পটগুলি AI ভিডিও জেনারেশন বা শ্যুটিং স্ক্রিপ্ট হিসেবে ব্যবহার করা যেতে পারে।</p>
+    </footer>
+
+    <!-- JavaScript to define and render the prompt data -->
+    <script>
+        // প্রম্পট ডেটা সেট (ready_to_use_prompts.md ফাইল থেকে নেওয়া)
+        const prompts = [
+            {
+                index: 1,
+                title: "জল অপচয় বন্ধ",
+                script: "একটি ৫ বছরের শিশু বাথরুমের সিঙ্কে দেখে যে কল খোলা আছে এবং জল গড়িয়ে পড়ছে। শিশুটি দ্রুত দৌড়ে গিয়ে কলটি বন্ধ করে দেয় এবং কলটির গায়ে হাত বুলিয়ে দেয়।",
+                dialogue: "জল নষ্ট করবে না।",
+                time: "৮ সেকেন্ড, উজ্জ্বল আলো এবং জলের শব্দ।"
+            },
+            {
+                index: 2,
+                title: "বয়স্কের ব্যাগ সহায়ক",
+                script: "রাস্তার পাশে একজন বয়স্ক লোক ভারী বাজার নিয়ে রিকশার জন্য অপেক্ষা করতে গিয়ে হাঁপাচ্ছেন। ৫ বছরের শিশুটি দৌড়ে যায়, ব্যাগটি ধরে থাকে এবং বয়স্ক ব্যক্তিকে স্বস্তি দেয়।",
+                dialogue: "আমি একটু ধরি? বেশ ভারি তো!",
+                time: "৮ সেকেন্ড, সকালের মিষ্টি রোদ, সহানুভূতির দৃশ্য।"
+            },
+            {
+                index: 3,
+                title: "লিফট শিষ্টাচার",
+                script: "শপিং মলের লিফটের দরজা বন্ধ হতে শুরু করেছে এবং একজন বয়স্ক ব্যক্তি দৌড়ে আসছেন। ৫ বছরের শিশুটি দ্রুত লিফটের 'ডোর ওপেন' বোতাম চেপে ধরে হাসি দেয়।",
+                dialogue: "একটু অপেক্ষা করো, আসছে।",
+                time: "৮ সেকেন্ড, ক্লোজ-আপ শট, লিফটের ভেতরের দৃশ্য।"
+            },
+            {
+                index: 4,
+                title: "মাস্ক সচেতনতা",
+                script: "ভিড়ের মধ্যে একজন প্রাপ্তবয়স্ক মাস্ক ছাড়া হাঁটছেন। ৫ বছরের শিশুটি নিজের পকেট থেকে ভাঁজ করা একটি ছোট মাস্ক বের করে তাকে দেওয়ার চেষ্টা করে।",
+                dialogue: "মাস্কটা পরো, প্লিজ।",
+                time: "৮ সেকেন্ড, দ্রুত ফোকাস, মানুষের ভিড়।"
+            },
+            {
+                index: 5,
+                title: "পাখির খাবার ভাগাভাগি",
+                script: "ছাদের কিনারে বা পার্কে দুটি পাখি একই শস্যদানা নিয়ে সামান্য ঝগড়া করছে। ৫ বছরের শিশুটি আরো কিছু শস্য এনে তাদের জন্য ছড়িয়ে দেয়।",
+                dialogue: "সবাই খাও! অনেক আছে।",
+                time: "৮ সেকেন্ড, পাখির কিচিরমিচির শব্দ, প্রকৃতির দৃশ্য।"
+            },
+            {
+                index: 6,
+                title: "ডিজিটাল ডিটক্স (বাবা-মা)",
+                script: "বাবা সোফায় বসে ফোন স্ক্রল করছেন এবং শিশুকে উপেক্ষা করছেন। শিশুটি বাবার হাত থেকে ফোনটি আলতো করে সরিয়ে নিয়ে, তার চোখে একটি মজার ঘুমের মাস্ক পরিয়ে দেয়।",
+                dialogue: "এবার চোখ বন্ধ, ঘুমাবে!",
+                time: "৮ সেকেন্ড, ইনডোর, নরম পারিবারিক আলো।"
+            },
+            {
+                index: 7,
+                title: "আবর্জনা বীর",
+                script: "পার্কের একটি বেঞ্চের নিচে একটি চিপসের প্যাকেট পড়ে আছে। ৫ বছরের শিশুটি সেটি তুলে নিয়ে হাসিমুখে ডাস্টবিনে ফেলে দেয় এবং ডাস্টবিনের দিকে তাকিয়ে অভিবাদন জানায়।",
+                dialogue: "ধন্যবাদ, ডাস্টবিন!",
+                time: "৮ সেকেন্ড, রোদ ঝলমলে পার্ক, পরিষ্কার-পরিচ্ছন্নতার বার্তা।"
+            },
+            {
+                index: 8,
+                title: "ঝগড়া থামাও",
+                script: "দুজন প্রতিবেশী ছোটখাটো বিষয় নিয়ে উত্তপ্ত ঝগড়া করছে। শিশুটি মাঝখানে এসে তাদের দুজনের হাতে দুটি করে লজেন্স দেয়।",
+                dialogue: "লজেন্স খাও, খুশি হও।",
+                time: "৮ সেকেন্ড, ফেসিয়াল এক্সপ্রেশন ফোকাস, মিষ্টি শব্দের মাধ্যমে পরিস্থিতি শান্ত হওয়া।"
+            },
+            {
+                index: 9,
+                title: "খেলার নিয়ম",
+                script: "খেলার সময় তার বন্ধু রেগে গিয়ে বা অসন্তোষে খেলার নিয়ম মানতে চাইছে না। শিশুটি একটি হাতে আঁকা 'নিয়ম বই' (খেলনা) এনে দেখায়।",
+                dialogue: "নিয়ম মানতে হয়!",
+                time: "৮ সেকেন্ড, খেলার মাঠের দৃশ্য, শিশুদের মধ্যে বোঝাপড়া।"
+            },
+            {
+                index: 10,
+                title: "পড়া আগে, তারপর খেলা",
+                script: "একজন কিশোর/কিশোরী পড়াশোনা না করে টিভি দেখতে গিয়ে সময় নষ্ট করছে। ৫ বছরের শিশুটি টিভির সুইচ বন্ধ করে একটি বই এনে তার সামনে খুলে ধরে।",
+                dialogue: "আগে পড়া, তারপর খেলা।",
+                time: "৮ সেকেন্ড, শিক্ষামূলক টোন, ইনডোর শট।"
+            }
+        ];
+
+        // ভিডিও কার্ড তৈরি করার ফাংশন
+        function createPromptCard(prompt) {
+            return `
+                <div class="card-bg rounded-xl p-6 shadow-md border-b-4 border-blue-500 flex flex-col space-y-3">
+                    <div class="flex items-center space-x-3 border-b pb-2 mb-2">
+                        <span class="text-2xl font-black text-white bg-blue-600 w-10 h-10 flex items-center justify-center rounded-full shadow-lg">${prompt.index}</span>
+                        <h3 class="text-xl font-bold text-gray-800">${prompt.title}</h3>
+                    </div>
+                    
+                    <!-- Prompt Description -->
+                    <div class="flex flex-col space-y-1">
+                        <p class="text-sm font-semibold text-gray-700">ভিডিও প্রম্পট:</p>
+                        <p class="text-base text-gray-600 bg-gray-50 p-3 rounded-lg border border-gray-200">${prompt.script}</p>
+                    </div>
+
+                    <!-- Dialogue and Time -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <!-- Dialogue -->
+                        <div class="bg-green-100 p-3 rounded-lg border border-green-300">
+                            <p class="text-xs font-bold text-green-700 uppercase mb-1">ডায়ালগ:</p>
+                            <p class="text-lg font-extrabold text-green-900">${prompt.dialogue}</p>
+                        </div>
+                        
+                        <!-- Time -->
+                        <div class="bg-yellow-100 p-3 rounded-lg border border-yellow-300">
+                            <p class="text-xs font-bold text-yellow-700 uppercase mb-1">সময়কাল:</p>
+                            <p class="text-sm font-semibold text-yellow-900">${prompt.time}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // মূল রেন্ডারিং ফাংশন
+        function renderPrompts() {
+            const promptListContainer = document.getElementById('prompt-list');
+            
+            if (prompts.length === 0) {
+                promptListContainer.innerHTML = '<p class="text-center text-lg text-gray-500">কোনো প্রম্পট ডেটা পাওয়া যায়নি।</p>';
+                return;
+            }
+
+            const promptHtml = prompts.map(prompt => createPromptCard(prompt)).join('');
+            promptListContainer.innerHTML = promptHtml;
+        }
+
+        // পেইজ লোড হওয়ার পরে রেন্ডার করা
+        window.onload = renderPrompts;
+    </script>
+</body>
+</html>
