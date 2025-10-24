@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Discount eBooks - My eBook Hub</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Tailwind Configuration (Using Custom Colors based on user's index.html) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-navy': '#23395d', // Dark blue from header/footer
+                        'accent-blue': '#3763db', // Blue from CTA button
+                        'light-bg': '#f0f4ff', // Light background gradient start
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles that can't be easily done with Tailwind or to set baseline -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff 0%, #f9fafc 100%);
+            color: #222;
+        }
+
+        .main-header, .main-footer {
+            background: #23395d;
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Modal Styles (Adapted from user's provided structure) */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 50px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 18px;
+            box-shadow: 0 6px 32px rgba(55,99,219,0.18);
+            position: relative;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .ebook-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        
+        .ebook-cover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section (Tailwind enhanced, based on user's colors) -->
+    <header class="main-header py-4 rounded-b-xl shadow-lg">
+        <div class="container flex justify-between items-center header-content">
+            <h1 class="text-2xl font-bold logo">
+                <a href="index.html" class="text-white hover:text-accent-blue transition duration-200">My eBook Hub</a>
+            </h1>
+            <nav class="main-nav">
+                <ul class="flex space-x-6 text-white text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-accent-blue transition duration-200">Home</a></li>
+                    <li><a href="#" class="text-accent-blue transition duration-200">Browse Books</a></li>
+                    <li><a href="categories.html" class="hover:text-accent-blue transition duration-200">Categories</a></li>
+                    <li><a href="about.html" class="hover:text-accent-blue transition duration-200">About</a></li>
+                    <li><a href="dashboard.html" class="hover:text-accent-blue transition duration-200">Dashboard</a></li>
+                    <li><a href="payment.html" class="hover:text-accent-blue transition duration-200">Payment</a></li>
+                    <li><a href="#" id="open-auth-modal-btn" class="hover:text-red-300 transition duration-200">Login/Signup</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Section for Discounts -->
+    <section class="banner bg-accent-blue py-16 mb-10 shadow-xl">
+        <div class="container text-center text-white">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4">📚 Special Discount Offer! 🚀</h2>
+            <p class="text-xl md:text-2xl font-light">Grab 20 famous Bengali & English eBooks at 30% off for a limited time.</p>
+        </div>
+    </section>
+
+    <!-- Main Content: Discounted Ebook Grid -->
+    <main class="main-content container">
+        <section class="ebook-grid-section" id="ebook-grid-section">
+            <h2 class="text-3xl font-bold text-primary-navy mb-8 border-b-2 border-accent-blue pb-2">Featured Discounted Titles (20 Books)</h2>
+            
+            <!-- Book Grid container -->
+            <div class="grid ebook-grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" id="ebook-list">
+                <!-- Book Cards will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="flex justify-center mt-12">
+                <button class="bg-primary-navy hover:bg-accent-blue text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-md load-more-btn" id="load-more-btn">
+                    Show All 20 Books
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Ebook Detail Modal (Adapted from user's structure) -->
+    <div id="ebook-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-body p-4">
+                <h3 id="modal-title" class="text-2xl font-bold text-primary-navy mb-4">Book Title</h3>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <img id="modal-cover" src="" alt="eBook Cover" class="modal-cover w-full md:w-1/3 h-auto rounded-lg mb-4 object-cover">
+                    <div class="flex-1">
+                        <p class="text-gray-600 mb-4" id="modal-description">A detailed description of the book will appear here.</p>
+                        <div class="modal-details space-y-2 text-sm">
+                            <p><strong>Author:</strong> <span id="modal-author" class="font-semibold text-gray-700"></span></p>
+                            <p><strong>Language:</strong> <span id="modal-language" class="font-semibold text-gray-700"></span></p>
+                            <p><strong>Original Price:</strong> <span id="modal-original-price" class="line-through text-red-500 font-semibold"></span></p>
+                            <p class="text-lg"><strong>Discounted Price:</strong> <span id="modal-discount-price" class="text-green-600 font-bold"></span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Preview Section (Simplified) -->
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <h4 class="text-xl font-bold mb-3 text-primary-navy">Preview:</h4>
+                    <div class="text-sm text-gray-700 italic">
+                        The full preview functionality requires a PDF viewer. Here is a placeholder:
+                        <p class="mt-2 p-3 border border-gray-200 bg-white rounded">
+                            "The world is vast, and curiosity is the engine of discovery. Begin your journey now."
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Actions -->
+                <div class="modal-actions flex flex-wrap gap-4 mt-6">
+                    <a id="modal-download-btn" href="#" class="flex items-center bg-accent-blue hover:bg-primary-navy text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                        <i class="fas fa-download mr-2"></i> Download PDF
+                    </a>
+                    <a id="modal-demo-btn" href="#" class="flex items-center bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                        <i class="fas fa-file-alt mr-2"></i> Read Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Auth Modal (Kept structure for consistency, no functionality) -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content auth-form">
+            <span class="close-button">&times;</span>
+            <p class="text-center font-bold text-lg p-8">
+                Authentication Modal Placeholder. (Login/Signup forms would go here)
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer Section (Tailwind enhanced) -->
+    <footer class="main-footer mt-12 py-6 rounded-t-xl shadow-inner">
+        <div class="container footer-content flex flex-col sm:flex-row justify-between items-center">
+            <p class="text-sm mb-2 sm:mb-0">&copy; 2025 Monjurul. All rights reserved.</p>
+            <div class="social-links flex space-x-4 text-xl">
+                <a href="https://github.com/Economics-2" target="_blank" class="hover:text-accent-blue transition duration-200"><i class="fab fa-github"></i></a>
+                <a href="https://github.com/Economics-2" target="_blank" class="hover:text-accent-blue transition duration-200"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/Economics-2" target="_blank" class="hover:text-accent-blue transition duration-200"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    // --- MOCK BOOK DATA (20 Titles: 10 Bengali, 10 English) ---
+    const MOCK_BOOKS = [
+        // Bengali Classics (10)
+        { id: 1, title: "Pather Panchali (পথের পাঁচালী)", author: "Bibhutibhushan Bandyopadhyay", lang: "Bengali", cover: "https://placehold.co/150x220/23395d/ffffff?text=Pather+Panchali", originalPrice: 15.00, discountPrice: 10.50, description: "An epic, lyrical novel detailing the life of a poor family in a rural village of Bengal. A foundational work of Bengali literature." },
+        { id: 2, title: "Srikanta (শ্রীকান্ত)", author: "Sarat Chandra Chattopadhyay", lang: "Bengali", cover: "https://placehold.co/150x220/3763db/ffffff?text=Srikanta", originalPrice: 18.00, discountPrice: 12.60, description: "The autobiographical tale of Srikanta, a wanderer and philosopher, navigating complex relationships and the changing social landscape." },
+        { id: 3, title: "Sonar Kella (সোনার কেল্লা)", author: "Satyajit Ray", lang: "Bengali", cover: "https://placehold.co/150x220/23395d/ffffff?text=Sonar+Kella", originalPrice: 12.00, discountPrice: 8.40, description: "A famous Feluda mystery where the detective investigates a boy's memories of his previous life and a hidden golden fort." },
+        { id: 4, title: "Hajar Churashir Maa (১০৮৪-র মা)", author: "Mahasweta Devi", lang: "Bengali", cover: "https://placehold.co/150x220/3763db/ffffff?text=Hajar+Churashir+Maa", originalPrice: 16.00, discountPrice: 11.20, description: "A powerful and deeply emotional novel about a mother's journey to understand her son's involvement in revolutionary politics." },
+        { id: 5, title: "Debdas (দেবদাস)", author: "Sarat Chandra Chattopadhyay", lang: "Bengali", cover: "https://placehold.co/150x220/23395d/ffffff?text=Debdas", originalPrice: 10.00, discountPrice: 7.00, description: "The tragic tale of Debdas, whose unfulfilled love for his childhood sweetheart, Paro, leads him down a path of self-destruction." },
+        { id: 6, title: "Kobi (কবি)", author: "Tarashankar Bandyopadhyay", lang: "Bengali", cover: "https://placehold.co/150x220/3763db/ffffff?text=Kobi", originalPrice: 14.00, discountPrice: 9.80, description: "A classic narrative focusing on the life of a traveling poet and his exploration of art, love, and rural life in Bengal." },
+        { id: 7, title: "Tithidor (তিথীডোর)", author: "Buddhadeb Guha", lang: "Bengali", cover: "https://placehold.co/150x220/23395d/ffffff?text=Tithidor", originalPrice: 17.00, discountPrice: 11.90, description: "A romantic and scenic novel, known for its vivid descriptions of nature and intricate emotional development between the characters." },
+        { id: 8, title: "Feluda Somogro (ফেলুদা সমগ্র)", author: "Satyajit Ray", lang: "Bengali", cover: "https://placehold.co/150x220/3763db/ffffff?text=Feluda+Somogro", originalPrice: 25.00, discountPrice: 17.50, description: "The complete collection of stories featuring the iconic private investigator, Prodosh Chandra Mitter, alias Feluda." },
+        { id: 9, title: "Pratham Alo (প্রথম আলো)", author: "Sunil Gangopadhyay", lang: "Bengali", cover: "https://placehold.co/150x220/23395d/ffffff?text=Pratham+Alo", originalPrice: 22.00, discountPrice: 15.40, description: "A historical fiction masterpiece set during the Bengal Renaissance, featuring real historical figures like Rabindranath Tagore." },
+        { id: 10, title: "Shankhachil (শঙ্খচিল)", author: "Shirshendu Mukhopadhyay", lang: "Bengali", cover: "https://placehold.co/150x220/3763db/ffffff?text=Shankhachil", originalPrice: 13.00, discountPrice: 9.10, description: "A modern classic known for its blend of reality, fantasy, and subtle social commentary through engaging characters." },
+
+        // English Classics (10)
+        { id: 11, title: "Nineteen Eighty-Four", author: "George Orwell", lang: "English", cover: "https://placehold.co/150x220/23395d/ffffff?text=1984", originalPrice: 14.50, discountPrice: 10.15, description: "A dystopian social science fiction novel and a chilling warning against totalitarianism, constant surveillance, and control of thought." },
+        { id: 12, title: "Pride and Prejudice", author: "Jane Austen", lang: "English", cover: "https://placehold.co/150x220/3763db/ffffff?text=Pride+and+Prejudice", originalPrice: 11.00, discountPrice: 7.70, description: "A romantic novel of manners written with witty prose, focusing on the story of Elizabeth Bennet and Mr. Darcy." },
+        { id: 13, title: "The Great Gatsby", author: "F. Scott Fitzgerald", lang: "English", cover: "https://placehold.co/150x220/23395d/ffffff?text=The+Great+Gatsby", originalPrice: 13.50, discountPrice: 9.45, description: "A tragic story of wealth, love, idealism, and the excesses of the Jazz Age, seen through the eyes of Nick Carraway." },
+        { id: 14, title: "To Kill a Mockingbird", author: "Harper Lee", lang: "English", cover: "https://placehold.co/150x220/3763db/ffffff?text=Mockingbird", originalPrice: 15.50, discountPrice: 10.85, description: "A novel about the roots of human behavior—innocence and experience, kindness and cruelty, love and hatred, justice and injustice." },
+        { id: 15, title: "The Hobbit", author: "J.R.R. Tolkien", lang: "English", cover: "https://placehold.co/150x220/23395d/ffffff?text=The+Hobbit", originalPrice: 20.00, discountPrice: 14.00, description: "Bilbo Baggins, a comfortable hobbit, is swept into an epic quest to help a company of dwarves reclaim their stolen treasure from a dragon." },
+        { id: 16, title: "One Hundred Years of Solitude", author: "Gabriel García Márquez", lang: "English", cover: "https://placehold.co/150x220/3763db/ffffff?text=Solitude", originalPrice: 19.00, discountPrice: 13.30, description: "A masterpiece of magical realism that tells the story of the Buendía family over seven generations in the fictional town of Macondo." },
+        { id: 17, title: "Moby Dick", author: "Herman Melville", lang: "English", cover: "https://placehold.co/150x220/23395d/ffffff?text=Moby+Dick", originalPrice: 16.50, discountPrice: 11.55, description: "The tale of Captain Ahab's obsessive quest to seek revenge on the giant white whale, Moby Dick, offering a deep dive into human nature." },
+        { id: 18, title: "Frankenstein", author: "Mary Shelley", lang: "English", cover: "https://placehold.co/150x220/3763db/ffffff?text=Frankenstein", originalPrice: 12.50, discountPrice: 8.75, description: "A gothic novel that tells the story of Victor Frankenstein, a scientist who creates a grotesque yet sentient creature in an unorthodox experiment." },
+        { id: 19, title: "The Road", author: "Cormac McCarthy", lang: "English", cover: "https://placehold.co/150x220/23395d/ffffff?text=The+Road", originalPrice: 17.50, discountPrice: 12.25, description: "A post-apocalyptic tale of a father and his young son trekking across a desolate landscape, carrying the fire of humanity." },
+        { id: 20, title: "Wuthering Heights", author: "Emily Brontë", lang: "English", cover: "https://placehold.co/150x220/3763db/ffffff?text=Wuthering+Heights", originalPrice: 10.50, discountPrice: 7.35, description: "A tumultuous story of passion, jealousy, and revenge set on the bleak Yorkshire moors, centered around the enigmatic Heathcliff." },
+    ];
+
+    // --- UTILITY FUNCTIONS ---
+    
+    // Format price to currency string
+    const formatPrice = (price) => {
+        return '$' + price.toFixed(2);
+    };
+
+    // --- RENDERING FUNCTIONS ---
+
+    const renderBookCard = (book) => {
+        const discountPercentage = 100 - (book.discountPrice / book.originalPrice) * 100;
+        
+        return `
+            <div class="ebook-card bg-white p-4 rounded-xl shadow-lg transition duration-200 cursor-pointer flex flex-col items-center text-center" onclick="openBookModal(${book.id})">
+                <img src="${book.cover}" alt="${book.title} Cover" class="ebook-cover w-36 h-56 object-cover rounded-lg mb-3">
+                <p class="text-xs text-accent-blue font-semibold mb-1">${book.lang} (${discountPercentage.toFixed(0)}% OFF)</p>
+                <h3 class="text-base font-bold text-primary-navy truncate w-full px-2">${book.title}</h3>
+                <p class="text-xs text-gray-500 mb-2">${book.author}</p>
+                <div class="flex items-center space-x-2 mt-auto">
+                    <span class="text-xs line-through text-red-500">${formatPrice(book.originalPrice)}</span>
+                    <span class="text-lg font-extrabold text-green-600">${formatPrice(book.discountPrice)}</span>
+                </div>
+                <button class="w-full mt-3 bg-accent-blue text-white text-xs py-2 rounded-full hover:bg-primary-navy transition duration-200">View Details</button>
+            </div>
+        `;
+    };
+
+    const renderAllBooks = () => {
+        const listContainer = document.getElementById('ebook-list');
+        if (listContainer) {
+            listContainer.innerHTML = MOCK_BOOKS.map(renderBookCard).join('');
+        }
+        // Hide Load More button as all are loaded
+        document.getElementById('load-more-btn').style.display = 'none';
+    };
+
+    // --- MODAL FUNCTIONS ---
+
+    const ebookModal = document.getElementById('ebook-modal');
+    const authModal = document.getElementById('auth-modal');
+    
+    // Close function for both modals
+    const closeModals = () => {
+        ebookModal.style.display = 'none';
+        authModal.style.display = 'none';
+    };
+
+    // Global function to open the book details modal
+    window.openBookModal = (bookId) => {
+        const book = MOCK_BOOKS.find(b => b.id === bookId);
+        if (!book) return;
+
+        document.getElementById('modal-title').textContent = book.title;
+        document.getElementById('modal-cover').src = book.cover;
+        document.getElementById('modal-cover').alt = `${book.title} Cover`;
+        document.getElementById('modal-description').textContent = book.description;
+        document.getElementById('modal-author').textContent = book.author;
+        document.getElementById('modal-language').textContent = book.lang;
+        document.getElementById('modal-original-price').textContent = formatPrice(book.originalPrice);
+        document.getElementById('modal-discount-price').textContent = formatPrice(book.discountPrice);
+        
+        // Mock download link (using a generic placeholder link)
+        const mockDownloadUrl = `https://example.com/download/${book.id}.pdf`; 
+        document.getElementById('modal-download-btn').href = mockDownloadUrl;
+        document.getElementById('modal-demo-btn').href = mockDownloadUrl;
+
+        ebookModal.style.display = 'block';
+    };
+
+    // Function to open the Auth Modal
+    const openAuthModal = () => {
+        authModal.style.display = 'block';
+    };
+
+    // --- EVENT LISTENERS ---
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initial rendering of all books
+        renderAllBooks();
+        
+        // Modal closing listeners
+        document.querySelectorAll('.close-button').forEach(btn => {
+            btn.addEventListener('click', closeModals);
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == ebookModal || event.target == authModal) {
+                closeModals();
+            }
+        });
+        
+        // Link the header button to open the Auth modal
+        document.getElementById('open-auth-modal-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            openAuthModal();
+        });
+
+        // The following line was removed as 'browse-all-btn' does not exist in this file's HTML
+        /* document.getElementById('browse-all-btn').addEventListener('click', () => {
+            document.getElementById('ebook-grid-section').scrollIntoView({ behavior: 'smooth' });
+        });
+        */
+        
+        // Load More Button (now re-purposed to scroll to the books, since all are loaded)
+        document.getElementById('load-more-btn').addEventListener('click', () => {
+             document.getElementById('ebook-list').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+</script>
+</body>
+</html>
