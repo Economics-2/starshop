@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শুদ্ধ বাংলা উচ্চারণ নির্দেশিকা ও অনুশীলন</title>
+    <!-- Tailwind CSS লোড করা হচ্ছে -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* ফন্ট হিসেবে ইন্টার ব্যবহার করা হচ্ছে */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+Bengali:wght@400;700&display=swap');
+        body {
+            font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+            background-color: #fcfcfc; /* হালকা ব্যাকগ্রাউন্ড */
+            line-height: 1.8;
+        }
+        .text-section {
+            background-color: #ffffff;
+            border-left: 5px solid #06b6d4; /* Teal-500 এর সাথে সামঞ্জস্য রেখে */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        .practice-script-card {
+            transition: transform 0.2s;
+            border-bottom: 3px solid #67e8f9;
+        }
+        .practice-script-card:hover {
+            transform: translateY(-2px);
+            background-color: #f0f9ff;
+        }
+        .main-header {
+            border-bottom: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- HEADER: Sticky Header & Navigation -->
+    <header class="main-header sticky top-0 z-50 bg-white shadow-lg">
+        <div class="header-content h-16 flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-8">
+            <!-- Logo -->
+            <h1 class="logo text-xl font-bold text-indigo-600">
+                <a href="index.html" class="hover:text-indigo-800 transition duration-300">My eBook Hub</a>
+            </h1>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="main-nav hidden md:block">
+                <ul class="flex space-x-4 text-base font-medium">
+                    <li><a href="index.html" class="text-gray-700 hover:text-indigo-600 transition duration-300 rounded-lg p-2">Home</a></li>
+                    <li><a href="browse.html" class="text-gray-700 hover:text-indigo-600 transition duration-300 rounded-lg p-2">Browse Books</a></li>
+                    <li><a href="ai-course.html" class="text-gray-700 hover:text-indigo-600 transition duration-300 rounded-lg p-2">Ai Course</a></li>
+                    <li><a href="categories.html" class="text-gray-700 hover:text-indigo-600 transition duration-300 rounded-lg p-2">Categories</a></li>
+                    <li><a href="about.html" class="text-gray-700 hover:text-indigo-600 transition duration-300 rounded-lg p-2">About</a></li>
+                    <li><a href="dashboard.html" class="text-gray-700 hover:text-indigo-600 transition duration-300 rounded-lg p-2">Dashboard</a></li>
+                    <li>
+                        <a href="#" id="open-auth-modal-btn" class="ml-4 px-3 py-1 bg-indigo-600 text-white text-sm rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">
+                            Login/Signup
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <nav id="mobile-menu" class="md:hidden hidden bg-gray-50 border-t border-gray-200 py-2">
+            <ul class="flex flex-col space-y-1 px-4 text-sm font-medium">
+                <li><a href="index.html" class="block py-2 text-gray-700 hover:bg-indigo-100 hover:text-indigo-600 rounded-lg transition duration-300">Home</a></li>
+                <li><a href="browse.html" class="block py-2 text-gray-700 hover:bg-indigo-100 hover:text-indigo-600 rounded-lg transition duration-300">Browse Books</a></li>
+                <li><a href="ai-course.html" class="block py-2 text-gray-700 hover:bg-indigo-100 hover:text-indigo-600 rounded-lg transition duration-300">Ai Course</a></li>
+                <li><a href="categories.html" class="block py-2 text-gray-700 hover:bg-indigo-100 hover:text-indigo-600 rounded-lg transition duration-300">Categories</a></li>
+                <li><a href="about.html" class="block py-2 text-gray-700 hover:bg-indigo-100 hover:text-indigo-600 rounded-lg transition duration-300">About</a></li>
+                <li><a href="dashboard.html" class="block py-2 text-gray-700 hover:bg-indigo-100 hover:text-indigo-600 rounded-lg transition duration-300">Dashboard</a></li>
+                <li>
+                    <a href="#" id="open-auth-modal-btn-mobile" class="block text-center mt-2 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">
+                        Login/Signup
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- END HEADER -->
+
+    <!-- Main Content Area -->
+    <div class="max-w-4xl mx-auto p-4 sm:p-8 pt-20"> 
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 border-b-4 border-teal-500 inline-block pb-1">
+                বাংলা শুদ্ধ উচ্চারণ: ব্যাখ্যা ও অনুশীলন
+            </h1>
+            <p class="text-gray-600 text-lg mt-2">উচ্চারণকে নির্ভুল ও শ্রুতিমধুর করার সম্পূর্ণ নির্দেশিকা।</p>
+        </header>
+
+        <!-- ব্যাখ্যা ও বিশ্লেষণ বিভাগ -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-teal-700 mb-4 border-b pb-2">১. মূলনীতি ও বিশ্লেষণ</h2>
+            
+            <div class="space-y-6">
+                <!-- ১. 'অ' ধ্বনির উচ্চারণ -->
+                <div class="text-section p-4 rounded-lg">
+                    <h3 class="font-semibold text-lg text-gray-900 mb-2">১.১ 'অ' ধ্বনির বিবৃত ও সংবৃত উচ্চারণ</h3>
+                    <p class="text-sm text-gray-700">বাংলা 'অ' ধ্বনি দু'ভাবে উচ্চারিত হয়:</p>
+                    <ul class="list-disc list-inside ml-4 text-sm text-gray-700">
+                        <li>**বিবৃত (Open 'অ'):** সাধারণ উচ্চারণ, যেমন - 'কল', 'বন', 'জন'। শব্দের শুরুতে এই উচ্চারণ হয়, যদি পরে ই/ঈ, উ/ঊ না থাকে।</li>
+                        <li>**সংবৃত (Closed 'ও'বৎ):** 'ও' ধ্বনির মতো উচ্চারণ। যেমন - শব্দের শেষে (হাত-হাতে), যুক্তাক্ষরের পূর্বে (অক্ষর - ওক্খোর্), এবং যদি পরে ই/ঈ, উ/ঊ, ঋ-কার থাকে (মতি, শুধু)।</li>
+                    </ul>
+                    <p class="mt-2 text-xs text-indigo-500">অনুশীলন: 'অতিথির অভ‍্যর্থনা অনেক'। (ওতিথির ওভ্খোর্‌থোনা ওনেক্)</p>
+                </div>
+
+                <!-- ২. 'এ' ধ্বনির উচ্চারণ -->
+                <div class="text-section p-4 rounded-lg">
+                    <h3 class="font-semibold text-lg text-gray-900 mb-2">১.২ 'এ' ধ্বনির সংবৃত ও বিবৃত উচ্চারণ</h3>
+                    <p class="text-sm text-gray-700">বাংলা 'এ' ধ্বনিও দুই ধরনের হয়:</p>
+                    <ul class="list-disc list-inside ml-4 text-sm text-gray-700">
+                        <li>**সংবৃত ('এ'):** সাধারণ উচ্চারণ। যেমন - 'কেমন', 'দেশের', 'তেল', 'প্রেম'। সাধারণত শব্দের শেষে, বা শব্দের মাঝখানে এই উচ্চারণ হয়।</li>
+                        <li>**বিবৃত ('অ্যা'):** জিভের অগ্রভাগ নিচে নামিয়ে উচ্চারণ। যেমন - 'এক', 'বেলা', 'খেলা', 'যেন'। একাক্ষর শব্দ, বা শব্দের শুরুতে 'এ'-এর পরে যদি ই/ঈ, উ/ঊ না থাকে।</li>
+                    </ul>
+                    <p class="mt-2 text-xs text-indigo-500">অনুশীলন: 'একজনের খেলা দেখে ছেলেটা গেল'। (অ্যাক্-জনের খেলা দেখে ছেলেটা গেলো)</p>
+                </div>
+
+                <!-- ৩. ফলা-র উচ্চারণ -->
+                <div class="text-section p-4 rounded-lg">
+                    <h3 class="font-semibold text-lg text-gray-900 mb-2">১.৩ ফলা ও যুক্তাক্ষরের জটিলতা</h3>
+                    <ul class="list-disc list-inside ml-4 text-sm text-gray-700">
+                        <li>**য-ফলা:** শব্দের শুরুতে থাকলে 'অ্যা' (ব্যথা - ব‍্যাথা)। অন্য জায়গায় সাধারণত দ্বিত্ব উচ্চারণ হয় (গদ্য - গদ্দ্ দ্)।</li>
+                        <li>**ব-ফলা:** শব্দের শুরুতে সাধারণত অনুচ্চারিত থাকে (স্বদেশ - শোদেশ), তবে দ্বিত্ব উচ্চারণ হতে পারে (বিশ্বাস - বিশ্শাশ্)।</li>
+                        <li>**ম-ফলা:** দ্বিত্ব উচ্চারণ এবং নাসিক্য (ঞ, ণ, ন, ম)-এর মতো উচ্চারণ যোগ হয় (আত্মা - আত্তা, সম্মান - শম্মান্)।</li>
+                        <li>**ক্ষ:** এর উচ্চারণ সাধারণত 'ক্খ' হয় (শিক্ষা - শিক্খা)।</li>
+                        <li>**জ্ঞ:** এর উচ্চারণ 'গ্গঁ' বা 'গ্গ' হয় (জ্ঞান - গ্যান্, বিজ্ঞান - বিগ্গ্যান্)।</li>
+                    </ul>
+                </div>
+
+                <!-- ৪. শ, ষ, স এর উচ্চারণ -->
+                <div class="text-section p-4 rounded-lg">
+                    <h3 class="font-semibold text-lg text-gray-900 mb-2">১.৪ শ, ষ, স (শিস ধ্বনি) এর পার্থক্য</h3>
+                    <p class="text-sm text-gray-700">বাংলায় এই তিনটি বর্ণ থাকলেও উচ্চারণে প্রায়শই পার্থক্য থাকে না। সাধারণত 'স' উচ্চারিত হয় 'শ'-এর মতো।</p>
+                    <ul class="list-disc list-inside ml-4 text-sm text-gray-700">
+                        <li>**শ ও ষ:** তালব্য শ-এর মতো উচ্চারিত হয় (শব্দ, ষড়যন্ত্র - শোব্দ, শড়যন্ত্র)।</li>
+                        <li>**স:** দন্ত্য স হলেও আধুনিক বাংলায় এটিও প্রায়শই তালব্য 'শ'-এর মতো উচ্চারিত হয় (সময় - শোময়)।</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- অনুশীলন স্ক্রিপ্ট বিভাগ -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-teal-700 mb-4 border-b pb-2">২. ২০টি অনুশীলন স্ক্রিপ্ট</h2>
+            <p class="text-gray-600 mb-6">নিচের বাক্যগুলো জোরে জোরে, ধীরে এবং পরিষ্কারভাবে উচ্চারণের অনুশীলন করুন। বিশেষ করে বোল্ড (bold) করা শব্দগুলোর উচ্চারণে মনোযোগ দিন।</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- স্ক্রিপ্ট ১-১০ -->
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ০ ১</p>
+                    <p class="text-lg font-medium text-gray-800">আজকের আবহাওয়াটা বেশ **স্বচ্ছ**, কিন্তু একটু পরে **বৃষ্টি** আসতে পারে।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ০ ২</p>
+                    <p class="text-lg font-medium text-gray-800">শিক্ষার **উদ্দেশ্য** কেবল **জ্ঞান** অর্জন নয়, **আত্মা**রও উন্নতি।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ০ ৩</p>
+                    <p class="text-lg font-medium text-gray-800">একটি **অন্ধকার** রাতে সে **একা** **ঘরে** বসে **গল্প** লিখছিল।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ০ ৪</p>
+                    <p class="text-lg font-medium text-gray-800">তাঁর **অত্যন্ত** **শ্রদ্ধা** ছিল বড়দের প্রতি, যা **সবার** **জানা**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ০ ৫</p>
+                    <p class="text-lg font-medium text-gray-800">বিশাল **অরণ্য** জুড়ে **ছায়া** নেমে **এলো**, **যেন** এক **মায়াজাল**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ০ ৬</p>
+                    <p class="text-lg font-medium text-gray-800">**মনীষী**রা বলেন, **সময়** ও **স্রোত** **কারো** জন্য অপেক্ষা **করে** না।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ০ ৭</p>
+                    <p class="text-lg font-medium text-gray-800">**বিশেষ** **জ্ঞানের** জন্য **প্রত্যেককে** **নিয়মিত** **চর্চা** করা **উচিত**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ০ ৮</p>
+                    <p class="text-lg font-medium text-gray-800">**ব‍্যক্তিগত** **সম্মান** বজায় রাখা এবং **সত্য** কথা বলা **কর্তব‍্য**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ০ ৯</p>
+                    <p class="text-lg font-medium text-gray-800">**ছয়**টি **শস্যের** **বীজ** একসাথে **শীতকালে** রোপণ করা **হলো**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ০</p>
+                    <p class="text-lg font-medium text-gray-800">**বই** পড়া **শেষে** তিনি **অফিসের** জন্য **দ্রুত** **বেরিয়ে** **গেলেন**।</p>
+                </div>
+
+                <!-- স্ক্রিপ্ট ১১-২০ -->
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ১</p>
+                    <p class="text-lg font-medium text-gray-800">নদীর **জল** এখন **গভীর** নয়, **শুকনো** **পথে** **আস্তে** হাঁটা **সহজ**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ২</p>
+                    <p class="text-lg font-medium text-gray-800">তাঁর **অভাব** **অনুভব** **করে** সবাই **আজ** **মৌন** হয়ে **বসে** **আছে**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ৩</p>
+                    <p class="text-lg font-medium text-gray-800">এই **জটিল** **প্রশ্নটির** **উত্তর** **এক** **ঘণ্টার** মধ্যে **খোঁজা** **দরকার**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ৪</p>
+                    <p class="text-lg font-medium text-gray-800">**শ্রাবণ** মাসে **পশ্চিম** **দিশা** থেকে **ঘন** **বর্ষা** **নামে**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ৫</p>
+                    <p class="text-lg font-medium text-gray-800">**অকস্মাৎ** **খেলা** বন্ধ **হয়ে** **গেলো**, **কারণ** **বেশি** **হাওয়া** **দিচ্ছিল**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ৬</p>
+                    <p class="text-lg font-medium text-gray-800">তিনি **বিস্ময়** **মাখা** **চোখে** **নিঃশব্দে** **সম্মুখে** **তাকিয়ে** **রইলেন**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-lg font-medium text-gray-800">**সকাল** থেকে **সন্ধ্যা** পর্যন্ত **সকলকে** **সাথে** নিয়ে **চলা** **উচিত**।</p>
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ৭</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ৮</p>
+                    <p class="text-lg font-medium text-gray-800">**ছোট্ট** **বেলায়** **শোনা** **গল্পের** সেই **রাজপুত্র** **আজ** **কত** **বড়**?</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ১ ৯</p>
+                    <p class="text-lg font-medium text-gray-800">**অতঃপর** **পরীক্ষার** **সময়** **আসতেই** **ছেলেরা** **পড়তে** **বসল**।</p>
+                </div>
+                <div class="practice-script-card p-4 rounded-xl bg-white">
+                    <p class="text-xs font-mono text-gray-400 mb-1">স্ক্রিপ্ট ২ ০</p>
+                    <p class="text-lg font-medium text-gray-800">**কঠোর** **শ্রমের** মাধ্যমে **সাফল্য** **আসে**, এটাই **স্বাভাবিক** **নিয়ম**।</p>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="text-center mt-10 p-4 border-t border-gray-200">
+            <p class="text-sm text-gray-500">বাংলা উচ্চারণ একটি নিয়মিত অনুশীলনের বিষয়। দৈনিক ৫ মিনিট অভ্যাস করলে উচ্চারণ অনেক উন্নত হবে।</p>
+        </footer>
+    </div>
+
+    <!-- নির্বাচনের বার্তা (Notification Box) -->
+    <div id="notification" class="fixed bottom-4 right-4 bg-green-600 text-white p-4 rounded-lg shadow-xl hidden transition duration-300 ease-out transform translate-x-full" role="alert">
+        <div class="flex items-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span id="notification-text"></span>
+            <button onclick="closeNotification()" class="ml-4 text-white opacity-75 hover:opacity-100 focus:outline-none">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Script for Header Responsiveness and Placeholder Auth ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Toggle mobile menu visibility
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Placeholder functionality for the authentication button
+        const authButtons = [
+            document.getElementById('open-auth-modal-btn'),
+            document.getElementById('open-auth-modal-btn-mobile')
+        ];
+        
+        authButtons.forEach(btn => {
+            if (btn) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showNotification("লগইন/সাইনআপ মডাল এখানে খুলবে।", 'bg-indigo-600');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+        });
+
+        // Hide mobile menu on link click (optional, for better UX)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300); 
+            });
+        });
+        
+        // --- Notification Logic (Reused and adapted) ---
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        let timer;
+        
+        function showNotification(message, bgColor) {
+            notificationText.textContent = message;
+            
+            // Reset background colors
+            notification.classList.remove('bg-green-600', 'bg-indigo-600');
+            notification.classList.add(bgColor);
+
+            // Show notification
+            notification.classList.remove('hidden', 'translate-x-full');
+            notification.classList.add('translate-x-0');
+
+            // Clear previous timer and set new one
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                closeNotification();
+            }, 3000);
+        }
+
+        function closeNotification() {
+            notification.classList.remove('translate-x-0');
+            notification.classList.add('translate-x-full');
+            // Hide after transition
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 300); 
+        }
+
+    </script>
+</body>
+</html>
