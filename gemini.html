@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini VEO-3 বাংলা টিউটোরিয়াল ভিডিও</title>
+    <!-- Tailwind CSS লোড করা হচ্ছে -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* ফন্ট হিসেবে ইন্টার ও নোটো ব্যবহার করা হচ্ছে */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap');
+        body {
+            font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+            background-color: #f7f9fc;
+            line-height: 1.6;
+            color: #1a202c;
+        }
+        .container-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .header-bg {
+            background-image: linear-gradient(to right, #0575e6, #021b79); /* Gradient Blue */
+        }
+        .video-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Header/Hero Section -->
+    <header class="header-bg text-white shadow-xl py-12 mb-8">
+        <div class="container-main text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-3">জেমিনি ভিও-৩ (Gemini VEO-3) টিউটোরিয়াল</h1>
+            <p class="text-xl sm:text-2xl font-light">ইউটিউবে পাওয়া সেরা বাংলা ভিডিও গাইড</p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container-main">
+        <section id="video-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Video Cards will be inserted here by JavaScript -->
+        </section>
+        
+        <!-- Loading message/fallback -->
+        <div id="loading-message" class="text-center p-10 text-gray-500 text-lg hidden">
+            ভিডিও লোড হচ্ছে...
+        </div>
+        <div id="no-results" class="text-center p-10 text-gray-500 text-lg hidden">
+            দুঃখিত, এই সংক্রান্ত কোনো বাংলা টিউটোরিয়াল ভিডিও পাওয়া যায়নি।
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+        <p class="text-sm">ডেটা সোর্স: ইউটিউব সার্চ (Gemini VEO-3 বাংলা টিউটোরিয়াল)</p>
+    </footer>
+
+    <!-- JavaScript to render the video data -->
+    <script>
+        // ভিডিও ডেটা (সার্চ রেজাল্ট থেকে প্রাপ্ত) - মোট ৬টি ভিডিও
+        const videoData = [
+            {
+                title: "Free তে Google Veo 3 ইউজ করুন বাংলাদেশে! AI Video Genearator Tutorial",
+                channel: "Biprojeet Saha",
+                views: 331558,
+                date: "2025-06-14",
+                url: "http://www.youtube.com/watch?v=fq9UDnIP8yA",
+                videoId: "fq9UDnIP8yA"
+            },
+            {
+                title: "Make 2300+ Videos Using Veo 3 With Just One Gemini AI Pro Account🔥 || Google VEO 3 Tutorial Bangla",
+                channel: "TECH BEY",
+                views: 1820,
+                date: "2025-09-08",
+                url: "http://www.youtube.com/watch?v=TnWGsPx8Ugo",
+                videoId: "TnWGsPx8Ugo"
+            },
+            {
+                title: "Google VEO 3 দিয়ে ভিডিও তৈরি | veo 3 Tutorial Bangla | Veo 3 AI free | How to Use VEO 3 Bangla",
+                channel: "Rajon Sami",
+                views: 29396,
+                date: "2025-07-23",
+                url: "http://www.youtube.com/watch?v=TpfmXE8KQAc",
+                videoId: "TpfmXE8KQAc"
+            },
+            {
+                title: "How to Generate Bangla Talking Video in GEMINI VEO 3 Google AI",
+                channel: "Kamrul Hassan",
+                views: 6682,
+                date: "2025-06-06",
+                url: "http://www.youtube.com/watch?v=Vpq4XbOwFqA",
+                videoId: "Vpq4XbOwFqA"
+            },
+            {
+                title: "Veo 3 দিয়ে ফ্রিতে AI ভিডিও বানিয়ে নিন 🤯| Gemini Veo AI Free Video Generator Tutorial | Sakib Tech",
+                channel: "Sakib Tech",
+                views: 28180,
+                date: "2025-06-19",
+                url: "http://www.youtube.com/watch?v=nnCZOFbXjyA",
+                videoId: "nnCZOFbXjyA"
+            },
+            {
+                title: "How to create a Video with VEO 3 | VEO 3 Tutorial Bangla #banglavoice #gemini #veo3 #aivideo #shorts",
+                channel: "Zakir Hosen",
+                views: 6896,
+                date: "2025-06-17",
+                url: "http://www.youtube.com/watch?v=3JXW5DAY_As",
+                videoId: "3JXW5DAY_As"
+            }
+        ];
+
+        // সংখ্যাকে বাংলায় রূপান্তর করার ফাংশন
+        function formatNumberInBangla(num) {
+            const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return String(num).replace(/[0-9]/g, (d) => banglaDigits[d]);
+        }
+        
+        // ভিউ সংখ্যাকে K/M আকারে ফরমেট করার ফাংশন
+        function formatViews(views) {
+            if (views >= 1000000) {
+                return formatNumberInBangla((views / 1000000).toFixed(1)) + 'M';
+            } else if (views >= 1000) {
+                return formatNumberInBangla((views / 1000).toFixed(1)) + 'K';
+            }
+            return formatNumberInBangla(views);
+        }
+
+        // ভিডিও কার্ড তৈরি করার ফাংশন
+        function createVideoCard(video) {
+            const viewCountFormatted = formatViews(video.views);
+            const publishDateFormatted = formatNumberInBangla(new Date(video.date).toLocaleDateString('bn-BD'));
+            
+            // ইউটিউব থাম্বনেইলের URL (mqdefault: medium quality)
+            const thumbnailUrl = `https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg`;
+
+            return `
+                <div class="video-card bg-white rounded-xl overflow-hidden shadow-lg border-2 border-transparent hover:border-blue-500">
+                    <!-- Thumbnail -->
+                    <a href="${video.url}" target="_blank" class="block relative group">
+                        <img src="${thumbnailUrl}" onerror="this.onerror=null; this.src='https://placehold.co/480x270/cccccc/333333?text=Video+Thumbnail';" alt="${video.title} Thumbnail" class="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-80">
+                        <!-- Play Icon Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 3l12 9-12 9V3z"/>
+                            </svg>
+                        </div>
+                    </a>
+                    
+                    <!-- Content -->
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">
+                            <a href="${video.url}" target="_blank" class="hover:text-blue-600 transition duration-300 line-clamp-2">${video.title}</a>
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-2">চ্যানেল: <span class="font-semibold">${video.channel}</span></p>
+                        <div class="flex flex-wrap items-center text-xs text-gray-500 space-x-3">
+                            <span>👁️ ${viewCountFormatted} ভিউ</span>
+                            <span class="text-gray-400">•</span>
+                            <span>📅 ${publishDateFormatted}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // মূল রেন্ডারিং ফাংশন
+        function renderVideos() {
+            const videoListContainer = document.getElementById('video-list');
+            
+            if (videoData.length === 0) {
+                document.getElementById('no-results').classList.remove('hidden');
+                return;
+            }
+
+            const videoHtml = videoData.map(video => createVideoCard(video)).join('');
+            videoListContainer.innerHTML = videoHtml;
+        }
+
+        // পেইজ লোড হওয়ার পরে রেন্ডার করা
+        window.onload = renderVideos;
+    </script>
+</body>
+</html>
