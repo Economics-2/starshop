@@ -215,6 +215,14 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
+        // helper: escape HTML to avoid XSS
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>"']/g, function(m){
+                return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+            });
+        }
+
         // Theme toggle logic
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
@@ -263,43 +271,87 @@
                 const userEmail = document.getElementById('user-email');
                 const profileAvatar = document.getElementById('profileAvatar');
                 if (welcomeMessage && userEmail && profileAvatar) {
-                    const doc = await db.collection('users').doc(user.uid).get();
-                    let username = user.email;
-                    let avatar = '<i class="fas fa-user"></i>';
-                    if (doc.exists) {
-                        const userData = doc.data();
-                        username = userData.username || user.email;
-                        if (userData.avatarUrl) {
-                            avatar = `<img src="${userData.avatarUrl}" alt="Avatar" style="width:60px;height:60px;border-radius:50%;">`;
+                    try {
+                        const doc = await db.collection('users').doc(user.uid).get();
+                        let username = user.email;
+                        let avatar = '<i class="fas fa-user"></i>';
+                        if (doc.exists) {
+                            const userData = doc.data();
+                            username = userData.username || user.email;
+                            if (userData.avatarUrl) {
+                                avatar = `<img src="${escapeHtml(userData.avatarUrl)}" alt="Avatar" style="width:60px;height:60px;border-radius:50%;">`;
+                            }
                         }
+                        welcomeMessage.textContent = `স্বাগতম, ${username}!`;
+                        userEmail.textContent = user.email;
+                        profileAvatar.innerHTML = avatar;
+                    } catch (err) {
+                        console.error('User doc fetch error:', err);
+                        displayNotification('প্রোফাইল লোড করার সময় ত্রুটি ঘটে।', true);
                     }
-                    welcomeMessage.textContent = `স্বাগতম, ${username}!`;
-                    userEmail.textContent = user.email;
-                    profileAvatar.innerHTML = avatar;
                 }
-                // Stats (demo logic)
-                db.collection('books').where('owner', '==', user.uid).get().then(snap => {
+
+                // Stats (demo logic) with error handling
+                db.collection('books').where('owner', '==', user.uid).get()
+                .then(snap => {
+                    console.log('my books size:', snap.size);
                     document.getElementById('myBooksCount').textContent = snap.size;
-                });
-                db.collection('favorites').where('user', '==', user.uid).get().then(snap => {
-                    document.getElementById('favoritesCount').textContent = snap.size;
-                });
-                db.collection('reads').where('user', '==', user.uid).get().then(snap => {
-                    document.getElementById('recentReadsCount').textContent = snap.size;
+                })
+                .catch(err => {
+                    console.error('My books fetch error:', err);
+                    displayNotification('My Books লোডে ত্রুটি: ' + err.message, true);
                 });
 
-                // Recommendations (demo logic)
-                db.collection('books').limit(5).get().then(snapshot => {
+                db.collection('favorites').where('user', '==', user.uid).get()
+                .then(snap => {
+                    console.log('favorites size:', snap.size);
+                    document.getElementById('favoritesCount').textContent = snap.size;
+                })
+                .catch(err => {
+                    console.error('Favorites fetch error:', err);
+                });
+
+                db.collection('reads').where('user', '==', user.uid).get()
+                .then(snap => {
+                    console.log('reads size:', snap.size);
+                    document.getElementById('recentReadsCount').textContent = snap.size;
+                })
+                .catch(err => {
+                    console.error('Reads fetch error:', err);
+                });
+
+                // Recommendations (improved handling)
+                db.collection('books').limit(5).get()
+                .then(snapshot => {
                     const recList = document.getElementById('recommendationList');
+                    if (!recList) return;
                     recList.innerHTML = '';
+                    console.log('recommendations docs:', snapshot.size);
+
+                    if (snapshot.empty) {
+                        // Show user-friendly message when no recommendations
+                        recList.innerHTML = '<div class="book-card" style="width:100%;">কোনও সুপারিশ পাওয়া যায়নি।</div>';
+                        return;
+                    }
+
                     snapshot.forEach(doc => {
-                        const book = doc.data();
+                        const book = doc.data() || {};
+                        const title = book.title ? book.title : 'শিরোনাম নেই';
+                        const author = book.author ? book.author : '';
                         const card = document.createElement('div');
                         card.className = 'book-card';
-                        card.innerHTML = `<strong>${book.title}</strong><br>
-                            <span>${book.author || ''}</span>`;
+                        card.innerHTML = `<strong>${escapeHtml(title)}</strong><br>
+                            <span>${escapeHtml(author)}</span>`;
                         recList.appendChild(card);
                     });
+                })
+                .catch(err => {
+                    console.error('Recommendations fetch error:', err);
+                    displayNotification('সুপারিশ লোড করতে ত্রুটি: ' + err.message, true);
+                    const recList = document.getElementById('recommendationList');
+                    if (recList) {
+                        recList.innerHTML = '<div class="book-card" style="width:100%;">সুপারিশ লোড করা যায়নি। কনসোলে ত্রুটি দেখুন।</div>';
+                    }
                 });
             } else {
                 window.location.href = 'index.html';
